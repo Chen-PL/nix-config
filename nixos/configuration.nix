@@ -75,6 +75,8 @@
     };
   };
 
+  programs.dconf.enable = true;
+
   services = {
     fail2ban = {
       enable = true;
