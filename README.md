@@ -4,11 +4,13 @@ For personal use only.
 
 ## Rebuild
 
-### Home Manager
+### NixOS
 
 ```sh
 sudo nixos-rebuild switch --flake .#intel-nuc
 ```
+
+### Home Manager
 
 ```
 home-manager switch --flake .#chen@intel-nuc
