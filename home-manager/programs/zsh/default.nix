@@ -12,7 +12,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" ];
+      plugins = [ "extract" "git" "sudo" ];
       theme = "robbyrussell";
     };
 
