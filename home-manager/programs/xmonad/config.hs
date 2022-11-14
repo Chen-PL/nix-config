@@ -22,6 +22,7 @@ import XMonad.Util.Run (safeSpawn)
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle
+import XMonad.Util.Cursor
 
 main :: IO ()
 main = do
@@ -183,6 +184,7 @@ myLayoutHook =
 
 myStartupHook :: X ()
 myStartupHook = do
+  setDefaultCursor xC_left_ptr
   spawnOnce "autorandr -c"
   spawnOnce "fcitx5"
   spawnOnce "mullvad-vpn"

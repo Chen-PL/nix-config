@@ -5,6 +5,7 @@
     ./packages
     ./programs
     ./services
+    ./themes
   ];
 
   home = {
