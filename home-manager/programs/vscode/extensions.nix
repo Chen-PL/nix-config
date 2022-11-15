@@ -65,4 +65,10 @@
     version = "0.1.2022103109";
     sha256 = "01p8ym69wf4428wras9ikkvlmsmdq5qkjjkcnv2ywrrk8dz71wnd";
   }
+  {
+    name = "vscode-wakatime";
+    publisher = "WakaTime";
+    version = "22.0.0";
+    sha256 = "03znz01msvpbij7xb751nlmbrdpjf1r65qkssia4v7ik871rml1n";
+  }
 ]
