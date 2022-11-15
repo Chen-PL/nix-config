@@ -13,12 +13,15 @@
     geeqie                                      # Lightweight GTK based image viewer
     gnumake                                     # A tool to control the generation of non-source files from sources
     htop                                        # An interactive process viewer
+    jq                                          # A lightweight and flexible command-line JSON processor
     kdenlive                                    # Video editor
     lm_sensors                                  # Tools for reading hardware sensors
     mediainfo                                   # Supplies technical and tag information about a video or audio file
     mullvad-vpn                                 # Client for Mullvad VPN
+    nixpkgs-fmt                                 # Nix code formatter for nixpkgs
     pavucontrol                                 # PulseAudio Volume Control
     playerctl                                   # Command-line utility and library for controlling media players that implement MPRIS
+    rnix-lsp                                    # A work-in-progress language server for Nix, with syntax checking and basic completion
     screenfetch                                 # Fetches system/theme information in terminal for Linux desktop screenshots
     spotify                                     # Play music from the Spotify music service
     spotify-tui                                 # Spotify for the terminal written in Rust
