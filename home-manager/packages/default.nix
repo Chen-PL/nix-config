@@ -29,7 +29,7 @@
     wget                                        # Tool for retrieving files using HTTP, HTTPS, and FTP
     xfce.thunar                                 # Xfce file manager
     xorg.xev                                    # Print contents of X events
-    xorg.xwininfo                               # Command-line utility to print information about windows on an X server
+    xorg.xsetroot                               # Classic X utility to set your root window background to a given pattern or color
 
     # Fonts
     fira                                        # Sans-serif font for Firefox OS
