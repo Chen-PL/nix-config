@@ -13,6 +13,7 @@ in
     aspell # Spell checker for many languages
     avidemux # Free video editor designed for simple video editing tasks
     blanket # Listen to different sounds
+    coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
     file # A program that shows the type of files
     gcc # GNU Compiler Collection
@@ -25,6 +26,7 @@ in
     mediainfo # Supplies technical and tag information about a video or audio file
     mullvad-vpn # Client for Mullvad VPN
     nixpkgs-fmt # Nix code formatter for nixpkgs
+    ott # A tool for the working semanticist
     pavucontrol # PulseAudio Volume Control
     playerctl # Command-line utility and library for controlling media players that implement MPRIS
     rnix-lsp # A work-in-progress language server for Nix, with syntax checking and basic completion
