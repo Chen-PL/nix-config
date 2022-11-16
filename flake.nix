@@ -12,14 +12,14 @@
 
   outputs = { nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
-      intel-nuc = nixpkgs.lib.nixosSystem {
+      intel-nuc-12 = nixpkgs.lib.nixosSystem {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
         specialArgs = { inherit inputs; };
         modules = [
-          ./nixos/hosts/intel-nuc
+          ./nixos/hosts/intel-nuc-12
           ./nixos/devices/lg-42c2
           ./nixos/configuration.nix
         ];
@@ -27,7 +27,7 @@
     };
 
     homeConfigurations = {
-      "chen@intel-nuc" = home-manager.lib.homeManagerConfiguration {
+      "chen@intel-nuc-12" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
