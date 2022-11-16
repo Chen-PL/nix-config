@@ -14,6 +14,7 @@
     ./opam
     ./rime
     ./rofi
+    ./sublime-text
     ./ssh
     ./vscode
     ./xmonad
