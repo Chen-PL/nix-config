@@ -1,13 +1,12 @@
 { config, lib, ... }:
 
+with builtins;
+
 let
   sublimeSettingHome = "${config.xdg.configHome}/sublime-text/Packages/User";
-  moduleToList = module:
-    lib.attrsets.mapAttrsToList
-      (filename: settings: { "${sublimeSettingHome}/${filename}".text = builtins.toJSON settings; })
+  moduleToList = module: lib.attrsets.mapAttrsToList
+      (filename: settings: { "${sublimeSettingHome}/${filename}".text = toJSON settings; })
       (import module);
-  modulesToHomeFile = modules:
-    lib.attrsets.zipAttrsWith (_: list: builtins.head list) (builtins.concatMap moduleToList modules);
 
   settingModules = [
     ./abella
@@ -18,5 +17,5 @@ let
   ];
 in
 {
-  home.file = modulesToHomeFile settingModules;
+  home.file = foldl' (x: y: x // y) { } (concatMap moduleToList settingModules);
 }
