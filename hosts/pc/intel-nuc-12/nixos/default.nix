@@ -1,13 +1,17 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 {
   imports = [
+    ../../common/nixos
+
     inputs.hardware.nixosModules.common-pc
     inputs.hardware.nixosModules.common-pc-ssd
     inputs.hardware.nixosModules.common-cpu-intel
     inputs.hardware.nixosModules.common-gpu-intel
     ./hardware-configuration.nix
   ];
+
+  system.stateVersion = "22.11";
 
   boot = {
     loader = {
@@ -22,7 +26,7 @@
   };
 
   networking = {
-    hostName = "intel-nuc";
+    hostName = "intel-nuc-12";
     interfaces = {
       enp86s0.useDHCP = lib.mkDefault true;
       wlo1.useDHCP = lib.mkDefault true;
@@ -37,7 +41,7 @@
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       vaapiVdpau
       libvdpau-va-gl
     ];

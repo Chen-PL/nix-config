@@ -10,33 +10,33 @@
     hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      intel-nuc-12 = nixpkgs.lib.nixosSystem {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./nixos/hosts/intel-nuc-12
-          ./nixos/devices/lg-42c2
-          ./nixos/configuration.nix
-        ];
+  outputs = { nixpkgs, home-manager, ... }@inputs:
+    let
+      pkgs-x86_64 = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
       };
-    };
+    in
+    {
+      nixosConfigurations = {
+        intel-nuc-12 = nixpkgs.lib.nixosSystem {
+          pkgs = pkgs-x86_64;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./devices/lg-42c2
+            ./hosts/pc/intel-nuc-12/nixos
+          ];
+        };
+      };
 
-    homeConfigurations = {
-      "chen@intel-nuc-12" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
+      homeConfigurations = {
+        "chen@intel-nuc-12" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs-x86_64;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/pc/intel-nuc-12/home
+          ];
         };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./home-manager/home.nix
-        ];
       };
     };
-  };
 }
