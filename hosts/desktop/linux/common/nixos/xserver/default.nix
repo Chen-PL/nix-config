@@ -21,8 +21,6 @@
             show-password-label = false
             password-alignment = left
             [greeter-theme]
-            password-character = 0
-            background-image = ""/
             background-color = "#2E3440"
             window-color = "#4C566A"
             border-color = "#4C566A"
