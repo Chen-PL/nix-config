@@ -37,7 +37,6 @@ in
     sublime4 # Sophisticated text editor for code, markup and prose (and Abella)
     texlive.combined.scheme-full # TeX Live environment for scheme-full
     vlc # Cross-platform media player and streaming server
-    wget # Tool for retrieving files using HTTP, HTTPS, and FTP
     xfce.thunar # Xfce file manager
     xorg.xev # Print contents of X events
     xorg.xsetroot # Classic X utility to set your root window background to a given pattern or color

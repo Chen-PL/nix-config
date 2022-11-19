@@ -62,6 +62,12 @@
     };
   };
 
+  # Bootstrap packages
+  environment.systemPackages = with pkgs; [
+    git
+    wget
+  ];
+
   virtualisation = {
     docker = {
       enable = true;
