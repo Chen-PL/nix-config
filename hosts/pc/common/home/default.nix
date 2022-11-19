@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ../../../common/home
+
     ./packages
     ./programs
     ./services

@@ -4,23 +4,13 @@
   imports = [
     ./alacritty
     ./autorandr
-    ./chromium
-    ./emacs
-    ./exa
-    ./fzf
-    ./git
     ./micro
-    ./nix-index
     ./nnn
-    ./opam
     ./rime
     ./rofi
     ./sublime-text
-    ./ssh
-    ./vscode
     ./xmonad
     ./zoxide
-    ./zsh
   ];
 
   programs = {
