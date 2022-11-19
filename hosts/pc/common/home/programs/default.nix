@@ -5,6 +5,7 @@
     ./alacritty
     ./autorandr
     ./chromium
+    ./emacs
     ./exa
     ./fzf
     ./git
@@ -24,7 +25,6 @@
 
   programs = {
     home-manager.enable = true;
-    emacs.enable = true;
     feh.enable = true;
     firefox.enable = true;
     obs-studio.enable = true;
