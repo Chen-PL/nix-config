@@ -7,11 +7,11 @@ For personal use only.
 ### NixOS
 
 ```sh
-sudo nixos-rebuild switch --flake .#intel-nuc
+sudo nixos-rebuild switch --flake .#hostname
 ```
 
 ### Home Manager
 
 ```
-home-manager switch --flake .#chen@intel-nuc
+home-manager switch --flake .#chen@hostname
 ```
