@@ -25,7 +25,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./devices/lg-42c2
-            ./hosts/pc/intel-nuc-12/nixos
+            ./hosts/desktop/linux/intel-nuc-12/nixos
           ];
         };
       };
@@ -35,7 +35,7 @@
           pkgs = pkgs-x86_64;
           extraSpecialArgs = { inherit inputs; };
           modules = [
-            ./hosts/pc/intel-nuc-12/home
+            ./hosts/desktop/linux/intel-nuc-12/home
           ];
         };
       };
