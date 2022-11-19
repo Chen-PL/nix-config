@@ -59,6 +59,13 @@
             ./hosts/desktop/linux/thinkpad-x1c-5th/home
           ];
         };
+        "chen@linode" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs-x86_64;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/server/linode/home
+          ];
+        };
       };
     };
 }
