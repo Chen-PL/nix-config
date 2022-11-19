@@ -1,3 +1,6 @@
 { 
-  imports = [ ./programs ];
+  imports = [
+    ../../../common/home
+    ./programs
+  ];
 }

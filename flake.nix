@@ -35,6 +35,13 @@
             ./hosts/desktop/linux/thinkpad-x1c-5th/nixos
           ];
         };
+        linode = nixpkgs.lib.nixosSystem {
+          pkgs = pkgs-x86_64;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/server/linode/nixos
+          ];
+        };
       };
 
       homeConfigurations = {
