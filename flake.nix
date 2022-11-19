@@ -45,6 +45,13 @@
             ./hosts/desktop/linux/intel-nuc-12/home
           ];
         };
+        "chen@thinkpad-x1c-5th" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs-x86_64;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/desktop/linux/thinkpad-x1c-5th/home
+          ];
+        };
       };
     };
 }
