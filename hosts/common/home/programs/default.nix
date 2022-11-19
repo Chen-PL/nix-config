@@ -1,7 +1,6 @@
 {
   imports = [
     ./exa
-    ./fzf
     ./git
     ./ssh
     ./zsh
