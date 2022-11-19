@@ -20,8 +20,8 @@
   {
     name = "gitlens";
     publisher = "eamodio";
-    version = "2022.11.1504";
-    sha256 = "1hfa2yjbb08z2bfxkcly0shrwwf6x7g4cvxicbrxd8isgcf1zfj0";
+    version = "2022.11.1804";
+    sha256 = "05yxq2wm3n9vi1bfnbrf6jzmxjpwc9czrcx2lrb6p2s5rfj5fd0w";
   }
   {
     name = "haskell";
@@ -42,6 +42,12 @@
     sha256 = "115y86w6n2bi33g1xh6ipz92jz5797d3d00mr4k8dv5fz76d35dd";
   }
   {
+    name = "Lisp";
+    publisher = "mattn";
+    version = "0.1.12";
+    sha256 = "0k10d77ffl6ybmk7mrpmlsawzwppp87aix2a2i24jq7lqnnqb9n7";
+  }
+  {
     name = "vscoq";
     publisher = "maximedenes";
     version = "0.3.6";
@@ -56,8 +62,8 @@
   {
     name = "remote-ssh";
     publisher = "ms-vscode-remote";
-    version = "0.93.2022111515";
-    sha256 = "1zqx6n1xhydqzqcm4g3xdsivyhrck2sklx7k89pv6sxbri77fxpb";
+    version = "0.93.2022111815";
+    sha256 = "1rwffyc62zfn608ch87gwll4nfgfsrrg7bl06cf2kq1xzgi3k0if";
   }
   {
     name = "remote-ssh-edit";
