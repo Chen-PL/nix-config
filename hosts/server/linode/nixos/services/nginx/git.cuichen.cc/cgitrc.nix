@@ -55,4 +55,6 @@
 
   include = ./cgitrepos;
 
+  virtual-root = "/";
+
 }
