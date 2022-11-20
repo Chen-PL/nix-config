@@ -5,7 +5,7 @@ with lib.attrsets;
 let
   sepByNewline = lib.concatStringsSep "\n";
   repoToStr = repo: sepByNewline
-    (mapAttrsToList (k: v: "repo.${k}=${toString v}") repo) ++ "\n";
+    (mapAttrsToList (k: v: "repo.${k}=${toString v}") repo);
   secToStr = sec: sepByNewline (map repoToStr sec);
   cgitConfig = sepByNewline (
     mapAttrsToList (k: v: "${k}=${toString v}") (import ./cgitrc.nix));
