@@ -1,4 +1,4 @@
-pkgs: ''
+cgitPkg: ''
 # Enable caching of up to 1000 output entriess
 cache-size=1000
 
@@ -53,7 +53,7 @@ mimetype.pdf=application/pdf
 mimetype.png=image/png
 mimetype.svg=image/svg+xml
 
-source-filter=${pkgs.cgit}/lib/cgit/filters/syntax-highlighting.py
+source-filter=${cgitPkg}/lib/cgit/filters/syntax-highlighting.py
 
 virtual-root=/
 include=${./cgitrepos}

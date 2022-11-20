@@ -1,16 +1,17 @@
 { config, lib, pkgs, ... }:
 
 let
+  cgitPkg = callPackage ../../../packages/cgit { };
   configFile = pkgs.writeText "cgitrc" (import ./cgitrc.nix pkgs);
 in
 {
-  environment.systemPackages = with pkgs; [ cgit ];
+  environment.systemPackages = [ cgitPkg ];
 
   services.nginx.virtualHosts = {
     "git.cuichen.cc" = {
       forceSSL = true;
       enableACME = true;
-      root = "${pkgs.cgit}/cgit/";
+      root = "${cgitPkg}/cgit/";
 
       extraConfig = ''
         try_files  $uri @cgit;
@@ -19,7 +20,7 @@ in
       locations = {
         "~ /.+/(info/refs|git-upload-pack)" = {
           fastcgiParams = {
-            SCRIPT_FILENAME = "${pkgs.git}/bin/git-http-backend";
+            SCRIPT_FILENAME = "${cgitPkg}/bin/git-http-backend";
             PATH_INFO = "$uri";
             GIT_HTTP_EXPORT_ALL = "1";
             GIT_PROJECT_ROOT = "/var/git";
@@ -33,7 +34,7 @@ in
         "@cgit" = {
           fastcgiParams = {
             CGIT_CONFIG = configFile;
-            SCRIPT_FILENAME = "${pkgs.cgit}/cgit/cgit.cgi";
+            SCRIPT_FILENAME = "${cgitPkg}/cgit/cgit.cgi";
             PATH_INFO = "$uri";
             QUERY_STRING = "$args";
             HTTP_HOST = "$server_name";
