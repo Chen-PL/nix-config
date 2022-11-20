@@ -9,9 +9,9 @@ let
   secToStr = sec: sepByNewline (map repoToStr sec);
   cgitConfig = sepByNewline (
     mapAttrsToList (k: v: "${k}=${toString v}") (import ./cgitrc.nix));
-  reposConfig = mapAttrsToList
-    (k: v: "section=${k}\n${secToStr v}\n")
-    (import ./cgitrepos.nix);
+  reposConfig = sepByNewline (mapAttrsToList
+    (k: v: "section=${k}\n${secToStr v}")
+    (import ./cgitrepos.nix));
   configFile = pkgs.writeText "cgitrc" (sepByNewline [cgitConfig reposConfig]);
 in
 {
