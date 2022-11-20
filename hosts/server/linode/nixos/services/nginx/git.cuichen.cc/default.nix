@@ -3,7 +3,7 @@
 let
   cgitConfig = lib.concatStringsSep "\n" (
     lib.attrsets.mapAttrsToList (k: v: "${k}=${toString v}")
-      (import ./cgitrc.nix));
+      (import ./cgitrc.nix pkgs));
   configFile = pkgs.writeText "cgitrc" cgitConfig;
 in
 {

@@ -1,4 +1,4 @@
-{
+pkgs: {
   # Enable caching of up to 1000 output entries
   cache-size = 1000;
 
@@ -55,12 +55,9 @@
 
   include = ./cgitrepos;
 
-  footer = ''
-    Powered by
-    <a href="https://git.zx2c4.com/cgit/about/">cgit</a>,
-    <a href="https://nginx.org/en/NGINX">NGINX</a> and
-    <a href="https://nixos.org/">NixOS</a>.
-  '';
+  footer = ./footer.html;
+
+  source-filter = "${pkgs.cgit}/lib/cgit/filters/syntax-highlighting.sh";
 
   virtual-root = "/";
 }
