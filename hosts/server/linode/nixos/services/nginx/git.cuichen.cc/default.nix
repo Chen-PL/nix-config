@@ -1,11 +1,18 @@
 { lib, pkgs, ... }:
 
+with lib.attrsets;
+
 let
-  cgitConfig = lib.attrsets.mapAttrsToList
-    (name: value: "${name}=${toString value}")
-    (import ./cgitrc.nix);
-  cgitConfigFile = pkgs.writeText "cgitrc"
-    (lib.concatStringsSep "\n" cgitConfig);
+  sepByNewline = lib.concatStringsSep "\n";
+  repoToStr = repo: sepByNewline
+    (mapAttrsToList (k: v: "repo.${k}=${toString v}") repo) ++ "\n";
+  secToStr = sec: sepByNewline (map repoToStr sec);
+  cgitConfig = sepByNewline (
+    mapAttrsToList (k: v: "${k}=${toString v}") (import ./cgitrc.nix));
+  reposConfig = sepByNewline (mapAttrsToList
+    (k: v: "section=${k}\n${secToStr v}")
+    (import ./cgitrepos.nix));
+  configFile = pkgs.writeText "cgitrc" (cgitConfig ++ "\n" ++ reposConfig);
 in
 {
   environment.systemPackages = [ pkgs.cgit ];
@@ -36,7 +43,7 @@ in
         };
         "@cgit" = {
           fastcgiParams = {
-            CGIT_CONFIG = cgitConfigFile;
+            CGIT_CONFIG = configFile;
             SCRIPT_FILENAME = "${pkgs.cgit}/cgit/cgit.cgi";
             PATH_INFO = "$uri";
             QUERY_STRING = "$args";
