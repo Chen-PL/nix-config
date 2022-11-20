@@ -11,7 +11,7 @@
       root = "${pkgs.cgit}/cgit/";
 
       extraConfig = ''
-        try_files  $uri @cgit
+        try_files  $uri @cgit;
       '';
 
       locations = {
