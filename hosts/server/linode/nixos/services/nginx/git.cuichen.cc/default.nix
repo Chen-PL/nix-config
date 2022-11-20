@@ -1,5 +1,12 @@
 { pkgs, ... }:
 
+let
+  cgitConfig = lib.attrsets.mapAttrsToList
+    (name: value: "${name}=${value}")
+    (import ./cgitrc.nix);
+  cgitConfigFile = pkgs.writeText "cgitrc"
+    (lib.concatStringsSep "\n" cgitConfig);
+in
 {
   environment.systemPackages = [ pkgs.cgit ];
 
@@ -30,6 +37,7 @@
         };
         "@cgit" = {
           fastcgiParams = {
+            CGIT_CONFIG = cgitConfigFile;
             SCRIPT_FILENAME = "${pkgs.cgit}/cgit/cgit.cgi";
             PATH_INFO = "$uri";
             QUERY_STRING = "$args";
