@@ -5,8 +5,8 @@
 
   services.nginx.virtualHosts = {
     "git.cuichen.cc" = {
-      # forceSSL = true;
-      # enableACME = true;
+      forceSSL = true;
+      enableACME = true;
       root = ./html;
     #   root = "${pkgs.cgit}/cgit/";
 
