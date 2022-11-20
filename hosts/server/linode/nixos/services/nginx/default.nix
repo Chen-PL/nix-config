@@ -10,7 +10,7 @@
       "server.cuichen.cc" = {
         forceSSL = true;
         enableACME = true;
-        root = "/var/www/server.cuichen.cc";
+        root =./server.cuichen.cc;
       };
     };
   };
