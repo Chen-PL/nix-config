@@ -7,7 +7,10 @@ let
   configFile = pkgs.writeText "cgitrc" cgitConfig;
 in
 {
-  environment.systemPackages = [ pkgs.cgit ];
+  environment.systemPackages = with pkgs; [
+    cgit
+    highlight
+  ];
 
   services.nginx.virtualHosts = {
     "git.cuichen.cc" = {
