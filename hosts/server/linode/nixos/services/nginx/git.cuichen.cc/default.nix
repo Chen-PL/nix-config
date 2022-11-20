@@ -2,7 +2,7 @@
 
 let
   cgitPkg = pkgs.callPackage ../../../packages/cgit { };
-  configFile = pkgs.writeText "cgitrc" (import ./cgitrc.nix pkgs);
+  configFile = pkgs.writeText "cgitrc" (import ./cgitrc.nix cgitPkg);
 in
 {
   environment.systemPackages = [ cgitPkg ];
