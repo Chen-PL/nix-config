@@ -24,7 +24,7 @@
             HOME = "/var/git";
           };
           extraConfig = ''
-            include       fastcgi_params;
+            include       ${pkgs.nginx}/conf/fastcgi_params;
             fastcgi_pass  unix:/run/fcgiwrap.sock;
           '';
         };
@@ -36,7 +36,7 @@
             HTTP_HOST = "$server_name";
           };
           extraConfig = ''
-            include       fastcgi_params;
+            include       ${pkgs.nginx}/conf/fastcgi_params;
             fastcgi_pass  unix:/run/fcgiwrap.sock;
           '';
         };
