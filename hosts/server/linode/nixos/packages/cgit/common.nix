@@ -32,7 +32,7 @@ stdenv.mkDerivation {
     substituteInPlace filters/html-converters/rst2html \
       --replace 'rst2html.py' '${docutils}/bin/rst2html.py'
     substituteInPlace filters/syntax-highlighting.py \
-      --replace 'pastie' 'material'
+      --replace 'pastie' 'default'
   '';
 
   # Give cgit a git source tree and pass configuration parameters (as make
