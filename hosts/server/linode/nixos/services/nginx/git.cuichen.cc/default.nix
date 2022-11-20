@@ -1,16 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cgitConfig = lib.concatStringsSep "\n" (
-    lib.attrsets.mapAttrsToList (k: v: "${k}=${toString v}")
-      (import ./cgitrc.nix pkgs));
-  configFile = pkgs.writeText "cgitrc" cgitConfig;
+  configFile = pkgs.writeText "cgitrc" (import ./cgitrc.nix pkgs);
 in
 {
-  environment.systemPackages = with pkgs; [
-    cgit
-    highlight
-  ];
+  environment.systemPackages = with pkgs; [ cgit ];
 
   services.nginx.virtualHosts = {
     "git.cuichen.cc" = {
