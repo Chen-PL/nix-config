@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   cgitConfig = lib.attrsets.mapAttrsToList
