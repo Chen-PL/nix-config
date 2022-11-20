@@ -1,4 +1,8 @@
 {
+  imports = [
+    ./server.cuichen.cc
+  ];
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "i@cuichen.cc";
@@ -43,13 +47,5 @@
       # This might create errors
       proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
-
-    virtualHosts = {
-      "server.cuichen.cc" = {
-        forceSSL = true;
-        enableACME = true;
-        root = ./server.cuichen.cc;
-      };
-    };
   };
 }
