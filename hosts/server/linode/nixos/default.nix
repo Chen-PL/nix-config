@@ -4,6 +4,8 @@
   imports = [
     ../../common/nixos
     ./hardware-configuration.nix
+
+    ./services
   ];
 
   system.stateVersion = "22.11";
