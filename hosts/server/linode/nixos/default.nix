@@ -47,5 +47,5 @@
     sysstat
   ];
 
-  users.users.chen.extraGroups = [ "git" ];
+  users.groups.git.members = [ "chen" ];
 }
