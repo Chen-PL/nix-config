@@ -43,7 +43,7 @@ in
           };
           extraConfig = ''
             include       ${pkgs.nginx}/conf/fastcgi_params;
-            fastcgi_pass  unix:/run/fcgiwrap.sock;
+            fastcgi_pass  unix:${config.services.fcgiwrap.socketAddress};
           '';
         };
       };
