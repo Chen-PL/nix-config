@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cgitPkg = callPackage ../../../packages/cgit { };
+  cgitPkg = pkgs.callPackage ../../../packages/cgit { };
   configFile = pkgs.writeText "cgitrc" (import ./cgitrc.nix pkgs);
 in
 {
