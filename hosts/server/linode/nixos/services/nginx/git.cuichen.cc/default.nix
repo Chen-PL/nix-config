@@ -1,18 +1,10 @@
 { lib, pkgs, ... }:
 
-with lib.attrsets;
-
 let
-  sepByNewline = lib.concatStringsSep "\n";
-  repoToStr = repo: sepByNewline
-    (mapAttrsToList (k: v: "repo.${k}=${toString v}") repo);
-  secToStr = sec: sepByNewline (map repoToStr sec);
-  cgitConfig = sepByNewline (
-    mapAttrsToList (k: v: "${k}=${toString v}") (import ./cgitrc.nix));
-  reposConfig = sepByNewline (mapAttrsToList
-    (k: v: "section=${k}\n${secToStr v}")
-    (import ./cgitrepos.nix));
-  configFile = pkgs.writeText "cgitrc" (sepByNewline [cgitConfig reposConfig]);
+  cgitConfig = lib.concatStringsSep "\n" (
+    lib.attrsets.mapAttrsToList (k: v: "${k}=${toString v}")
+      (import ./cgitrc.nix));
+  configFile = pkgs.writeText "cgitrc" cgitConfig;
 in
 {
   environment.systemPackages = [ pkgs.cgit ];

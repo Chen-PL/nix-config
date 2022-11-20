@@ -1,0 +1,4 @@
+repo.url=nix-config
+repo.path=/var/git/nix-config.git
+repo.desc=Chen's Home Manager & NixOS configurations
+repo.owner=i@cuichen.cc

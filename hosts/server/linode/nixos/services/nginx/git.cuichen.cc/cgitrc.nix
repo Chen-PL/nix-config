@@ -53,4 +53,6 @@
   # Allow download of tar.gz, tar.bz2 and zip-files
   snapshots = "tar.gz tar.bz2 zip";
 
+  include = ./cgitrepos;
+
 }
