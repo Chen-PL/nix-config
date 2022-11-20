@@ -2,7 +2,7 @@
 
 let
   cgitConfig = lib.attrsets.mapAttrsToList
-    (name: value: "${name}=${value}")
+    (name: value: "${name}=${toString value}")
     (import ./cgitrc.nix);
   cgitConfigFile = pkgs.writeText "cgitrc"
     (lib.concatStringsSep "\n" cgitConfig);
