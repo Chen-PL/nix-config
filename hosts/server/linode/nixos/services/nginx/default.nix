@@ -1,5 +1,6 @@
 {
   imports = [
+    ./git.cuichen.cc
     ./server.cuichen.cc
   ];
 
@@ -48,4 +49,6 @@
       proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
   };
+
+  services.fcgiwrap.enable = true;
 }
