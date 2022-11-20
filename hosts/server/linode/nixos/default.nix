@@ -46,4 +46,6 @@
     mtr
     sysstat
   ];
+
+  users.users.chen.extraGroups = [ "git" ];
 }
