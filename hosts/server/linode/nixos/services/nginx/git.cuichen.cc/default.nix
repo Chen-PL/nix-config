@@ -6,11 +6,10 @@ let
   sepByNewline = lib.concatStringsSep "\n";
   repoToStr = repo: sepByNewline
     (mapAttrsToList (k: v: "repo.${k}=${toString v}") repo) ++ "\n";
-  secToStr = sec: sepByNewline (map repoToStr sec);
   cgitConfig = sepByNewline (
     mapAttrsToList (k: v: "${k}=${toString v}") (import ./cgitrc.nix));
   reposConfig = sepByNewline (mapAttrsToList
-    (k: v: "section=${k}\n${secToStr v}")
+    (k: v: "section=${k}\n${map repoToStr v}")
     (import ./cgitrepos.nix));
   configFile = pkgs.writeText "cgitrc" (cgitConfig ++ "\n" ++ reposConfig);
 in
