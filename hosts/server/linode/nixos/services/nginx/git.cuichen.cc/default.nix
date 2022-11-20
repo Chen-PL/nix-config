@@ -20,7 +20,7 @@ in
       '';
 
       locations = {
-        "~ /.+/(info/refs|git-upload-pack)" = {
+        "/" = {
           fastcgiParams = {
             SCRIPT_FILENAME = "${pkgs.git}/bin/git-http-backend";
             PATH_INFO = "$uri";
