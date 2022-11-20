@@ -55,6 +55,12 @@
 
   include = ./cgitrepos;
 
-  virtual-root = "/";
+  footer = ''
+    Powered by
+    <a href="https://git.zx2c4.com/cgit/about/">cgit</a>,
+    <a href="https://nginx.org/en/NGINX">NGINX</a> and
+    <a href="https://nixos.org/">NixOS</a>.
+  '';
 
+  virtual-root = "/";
 }
