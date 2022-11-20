@@ -12,7 +12,7 @@ let
   reposConfig = mapAttrsToList
     (k: v: "section=${k}\n${secToStr v}\n")
     (import ./cgitrepos.nix);
-  configFile = pkgs.writeText "cgitrc" (cgitConfig ++ "\n" ++ reposConfig);
+  configFile = pkgs.writeText "cgitrc" (sepByNewline [cgitConfig reposConfig]);
 in
 {
   environment.systemPackages = [ pkgs.cgit ];
