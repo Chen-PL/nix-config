@@ -3,7 +3,7 @@
 with lib;
 
 let
-  url = "https://note.cuichen.cc";
+  url = "https://notes.cuichen.cc";
   exe = "${pkgs.nodePackages.tiddlywiki}/lib/node_modules/.bin/tiddlywiki";
   serv = wiki:
     let

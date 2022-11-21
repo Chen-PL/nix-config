@@ -1,6 +1,6 @@
 {
   imports = [
-    ./note.cuichen.cc
+    ./notes.cuichen.cc
     ./git.cuichen.cc
     ./server.cuichen.cc
   ];
