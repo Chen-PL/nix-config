@@ -12,7 +12,7 @@ let
         mapAttrsToList (n: v: " '${n}=${toString v}' ") wiki.options);
     in
     {
-      description = "TiddlyWiki nodejs server (${name})";
+      description = "TiddlyWiki nodejs server (${wiki.name})";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
