@@ -26,7 +26,6 @@ in
     "note.cuichen.cc" = {
       forceSSL = true;
       enableACME = true;
-      root = ./html;
 
       locations."/research/" = {
         proxyPass = "http://127.0.0.1:${toString researchWikiPort}";
