@@ -42,7 +42,7 @@ let
         };
       };
     in
-    foldl' (x: y: x // y) {} (map locStat wikis) // {
+    foldl' (x: y: x // y) { } (map locStat wikis) // {
       # Workarounds for subdir
       "~ ^/(status|recipes|bags)".extraConfig =
         concatStrings (map ifStat wikis);
@@ -51,13 +51,21 @@ let
   researchWiki = rec {
     name = "research";
     port = 8100;
-    options = { inherit port; };
+    options = {
+      inherit port;
+      credentials = "credentials.csv";
+      use-browser-cache = "yes";
+    };
   };
 
   nixWiki = rec {
     name = "nix";
     port = 8101;
-    options = { inherit port; };
+    options = {
+      inherit port;
+      credentials = "credentials.csv";
+      use-browser-cache = "yes";
+    };
   };
 in
 {
