@@ -3,54 +3,72 @@
 with lib;
 
 let
-  listenParams = options: concatStrings (mapAttrsToList (n: v: " '${n}=${toString v}' ") options);
+  url = "https://note.cuichen.cc";
   exe = "${pkgs.nodePackages.tiddlywiki}/lib/node_modules/.bin/tiddlywiki";
-  dataDir = name: "/var/lib/wiki/" + name;
-  servWiki = name: options: {
-    description = "TiddlyWiki nodejs server";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "simple";
-      Restart = "on-failure";
-      DynamicUser = true;
-      StateDirectory = "wiki/" + name;
-      ExecStartPre = "-${exe} ${dataDir name} --init server";
-      ExecStart = "${exe} ${dataDir name} --listen ${listenParams options}";
+  serv = wiki:
+    let
+      dataDir = "/var/lib/wiki/" + wiki.name;
+      listenParams = concatStrings (
+        mapAttrsToList (n: v: " '${n}=${toString v}' ") wiki.options);
+    in
+    {
+      description = "TiddlyWiki nodejs server (${name})";
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        Restart = "on-failure";
+        DynamicUser = true;
+        StateDirectory = "wiki/" + wiki.name;
+        ExecStartPre = "-${exe} ${dataDir} --init server";
+        ExecStart = "${exe} ${dataDir} --listen ${listenParams}";
+      };
     };
+  loc = wikis:
+    let
+      ifStat = wiki: ''
+        if ($http_referer = ${url}/${wiki.name}/) {
+          rewrite ^(.*)$ /${wiki.name}$1;
+        }
+      '';
+      locStat = wiki: {
+        "/${wiki.name}/" = {
+          proxyPass = "http://127.0.0.1:${toString wiki.port}/";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_ssl_server_name on;
+            proxy_pass_header Authorization;
+          '';
+        };
+      };
+    in
+    foldl' (x: y: x // y) (map locStat wikis) // {
+      # Workarounds for subdir
+      "~ ^/(status|recipes|bags)".extraConfig =
+        concatStrings (map ifStat wikis);
+    };
+
+  researchWiki = rec {
+    name = "research";
+    port = 8100;
+    options = { inherit port; };
   };
-  researchWikiPort = 8100;
+
+  nixWiki = rec {
+    name = "nix";
+    port = 8101;
+    options = { inherit port; };
+  };
 in
 {
   services.nginx.virtualHosts = {
     "note.cuichen.cc" = {
       forceSSL = true;
       enableACME = true;
-
-      locations = {
-        "/research/" = {
-          proxyPass = "http://127.0.0.1:${toString researchWikiPort}/";
-          proxyWebsockets = true; # needed if you need to use WebSocket
-          extraConfig =
-            # required when the target is also TLS server with multiple hosts
-            "proxy_ssl_server_name on;" +
-            # required when the server wants to use HTTP Authentication
-            "proxy_pass_header Authorization;"
-          ;
-        };
-        # Workarounds for subdir
-        "~ ^/(status|recipes|bags)".extraConfig = ''
-          if ($http_referer = https://note.cuichen.cc/research/) {
-            rewrite ^(.*)$ /research$1;
-          }
-        '';
-      };
+      locations = loc [ researchWiki nixWiki ];
     };
   };
 
-  systemd.services.tiddlywiki-research = servWiki "research" {
-    # credentials = "../credentials-research.csv";
-    port = researchWikiPort;
-    # readers = "(authenticated)";
-  };
+  systemd.services.tiddlywiki-research = serv researchWiki;
+  systemd.services.tiddlywiki-nix = serv nixWiki;
 }

@@ -3,7 +3,6 @@
     "server.cuichen.cc" = {
       forceSSL = true;
       enableACME = true;
-      root = ./html;
     };
   };
 }

@@ -16,12 +16,9 @@ in
     coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
     file # A program that shows the type of files
-    gcc # GNU Compiler Collection
     geeqie # Lightweight GTK based image viewer
-    gnumake # A tool to control the generation of non-source files from sources
     htop # An interactive process viewer
     jq # A lightweight and flexible command-line JSON processor
-    kdenlive # Video editor
     lm_sensors # Tools for reading hardware sensors
     mediainfo # Supplies technical and tag information about a video or audio file
     mullvad-vpn # Client for Mullvad VPN
@@ -38,8 +35,6 @@ in
     texlive.combined.scheme-full # TeX Live environment for scheme-full
     vlc # Cross-platform media player and streaming server
     xfce.thunar # Xfce file manager
-    xorg.xev # Print contents of X events
-    xorg.xsetroot # Classic X utility to set your root window background to a given pattern or color
 
     # Fonts
     fira # Sans-serif font for Firefox OS
