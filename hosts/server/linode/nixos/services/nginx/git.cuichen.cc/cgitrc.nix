@@ -17,7 +17,7 @@ readme=:README.md
 clone-prefix=https://git.cuichen.cc
 
 # Enable snapshots
-snapshots=tar.gz tar.bz2 zip
+snapshots=tar.gz zip
 
 # Disable owner index
 enable-index-owner=0
