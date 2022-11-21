@@ -26,6 +26,7 @@ in
     "note.cuichen.cc" = {
       forceSSL = true;
       enableACME = true;
+      root = ./html;
 
       locations."/research/" = {
         proxyPass = "http://127.0.0.1:${toString researchWikiPort}";
@@ -41,8 +42,8 @@ in
   };
 
   systemd.services.tiddlywiki-research = servWiki "research" {
-    credentials = "../credentials-research.csv";
+    # credentials = "../credentials-research.csv";
     port = researchWikiPort;
-    readers = "(authenticated)";
+    # readers = "(authenticated)";
   };
 }
