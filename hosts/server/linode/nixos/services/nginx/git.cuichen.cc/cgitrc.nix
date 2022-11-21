@@ -1,5 +1,6 @@
 cgitPkg: ''
-virtual-root=/ # Required for Nginx
+# Required for Nginx
+virtual-root=/
 
 css=/cgit.css
 favicon=/favicon.ico
