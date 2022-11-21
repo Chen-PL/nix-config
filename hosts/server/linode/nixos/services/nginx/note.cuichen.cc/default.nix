@@ -42,7 +42,7 @@ let
         };
       };
     in
-    foldl' (x: y: x // y) (map locStat wikis) // {
+    foldl' (x: y: x // y) {} (map locStat wikis) // {
       # Workarounds for subdir
       "~ ^/(status|recipes|bags)".extraConfig =
         concatStrings (map ifStat wikis);
