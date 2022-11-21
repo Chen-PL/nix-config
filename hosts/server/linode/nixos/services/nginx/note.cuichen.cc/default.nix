@@ -27,7 +27,7 @@ in
       forceSSL = true;
       enableACME = true;
 
-      locations."/research/" = {
+      locations."/" = {
         proxyPass = "http://127.0.0.1:${toString researchWikiPort}";
         proxyWebsockets = true; # needed if you need to use WebSocket
         extraConfig =
