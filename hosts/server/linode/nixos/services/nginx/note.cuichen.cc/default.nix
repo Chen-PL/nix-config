@@ -29,7 +29,7 @@ in
 
       locations = {
         "/research/" = {
-          proxyPass = "http://127.0.0.1:${toString researchWikiPort}/research/";
+          proxyPass = "http://127.0.0.1:${toString researchWikiPort}/";
           proxyWebsockets = true; # needed if you need to use WebSocket
           extraConfig =
             # required when the target is also TLS server with multiple hosts
@@ -38,6 +38,12 @@ in
             "proxy_pass_header Authorization;"
           ;
         };
+        # Workarounds for subdir
+        "~ ^/(status|recipes|bags)".extraConfig = ''
+          if ($http_referer = https://note.cuichen.cc/research/) {
+            rewrite ^(.*)$ /research$1;
+          }
+        '';
       };
     };
   };
@@ -45,7 +51,6 @@ in
   systemd.services.tiddlywiki-research = servWiki "research" {
     # credentials = "../credentials-research.csv";
     port = researchWikiPort;
-    path-prefix = "/research";
     # readers = "(authenticated)";
   };
 }
