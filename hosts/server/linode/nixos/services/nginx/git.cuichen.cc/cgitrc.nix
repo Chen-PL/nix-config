@@ -15,6 +15,7 @@ robots=noindex, nofollow
 readme=:README.md
 
 enable-http-clone=1
+clone-url=git://git.cuichen.cc/$CGIT_REPO_URL git@git.cuichen.cc:$CGIT_REPO_URL
 
 # Enable snapshots
 snapshots=tar.gz zip
@@ -31,10 +32,10 @@ mimetype.png=image/png
 mimetype.svg=image/svg+xml
 
 # Caching
-cache-dynamic-ttl=60
-cache-static-ttl=44640
-cache-root-ttl=6
-cache-repo-ttl=120
+# cache-dynamic-ttl=60
+# cache-static-ttl=44640
+# cache-root-ttl=6
+# cache-repo-ttl=120
 
 include=${./cgitrepos}
 ''
