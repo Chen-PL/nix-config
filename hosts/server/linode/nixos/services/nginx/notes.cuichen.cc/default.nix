@@ -3,7 +3,7 @@
 with lib;
 
 let
-  url = "https://notes.cuichen.cc";
+  server = "notes.cuichen.cc";
   exe = "${pkgs.nodePackages.tiddlywiki}/lib/node_modules/.bin/tiddlywiki";
   serv = wiki:
     let
@@ -27,7 +27,7 @@ let
   loc = wikis:
     let
       ifStat = wiki: ''
-        if ($http_referer = ${url}/${wiki.name}/) {
+        if ($http_referer = https://${server}/${wiki.name}/) {
           rewrite ^(.*)$ /${wiki.name}$1;
         }
       '';
@@ -62,7 +62,7 @@ let
 in
 {
   services.nginx.virtualHosts = {
-    "note.cuichen.cc" = {
+    ${server} = {
       forceSSL = true;
       enableACME = true;
       locations = loc [ researchWiki nixWiki ];
