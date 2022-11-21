@@ -1,6 +1,6 @@
 # Chen's NixOS & Home Manager configurations
 
-![NixOS logo](./assets/nixos.svg)
+![NixOS logo](./assets/nixos.svg.png)
 
 ## Currently avaliable hosts:
 
