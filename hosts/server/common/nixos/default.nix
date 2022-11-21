@@ -44,6 +44,7 @@
   # Bootstrap packages
   environment.systemPackages = with pkgs; [
     git
+    htop
     wget
   ];
 
