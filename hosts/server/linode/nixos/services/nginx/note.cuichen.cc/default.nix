@@ -45,6 +45,7 @@ in
   systemd.services.tiddlywiki-research = servWiki "research" {
     # credentials = "../credentials-research.csv";
     port = researchWikiPort;
+    path-prefix = "/research";
     # readers = "(authenticated)";
   };
 }
