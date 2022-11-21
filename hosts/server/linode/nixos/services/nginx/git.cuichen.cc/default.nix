@@ -20,7 +20,7 @@ in
       locations = {
         "~ /.+/(info/refs|git-upload-pack)" = {
           fastcgiParams = {
-            SCRIPT_FILENAME = "${cgitPkg}/bin/git-http-backend";
+            SCRIPT_FILENAME = "${pkgs.git}/bin/git-http-backend";
             PATH_INFO = "$uri";
             GIT_HTTP_EXPORT_ALL = "1";
             GIT_PROJECT_ROOT = "/var/git";
