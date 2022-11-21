@@ -42,11 +42,9 @@ let
         };
       };
     in
-    foldl' (x: y: x // y) { } (map locStat wikis) // {
-      # Workarounds for subdir
-      "~ ^/(status|recipes|bags)".extraConfig =
-        concatStrings (map ifStat wikis);
-    };
+    foldl' (x: y: x // y) {
+      "~ ^/(status|recipes|bags)".extraConfig = concatStrings (map ifStat wikis);
+    } (map locStat wikis);
 
   researchWiki = rec {
     name = "research";
