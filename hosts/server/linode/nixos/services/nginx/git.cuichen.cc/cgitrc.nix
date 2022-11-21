@@ -14,6 +14,7 @@ noplainemail=1
 robots=noindex, nofollow
 readme=:README.md
 
+enable-http-clone=1
 clone-prefix=https://git.cuichen.cc
 
 # Enable snapshots
