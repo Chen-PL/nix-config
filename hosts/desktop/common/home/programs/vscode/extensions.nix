@@ -20,8 +20,8 @@
   {
     name = "gitlens";
     publisher = "eamodio";
-    version = "2022.11.1804";
-    sha256 = "05yxq2wm3n9vi1bfnbrf6jzmxjpwc9czrcx2lrb6p2s5rfj5fd0w";
+    version = "2022.11.2204";
+    sha256 = "0npr9fymfjnrq7xvfj6fdc04lysz28qncf9r8syv0w9873f3695h";
   }
   {
     name = "haskell";
@@ -74,8 +74,14 @@
   {
     name = "remote-explorer";
     publisher = "ms-vscode";
-    version = "0.1.2022103109";
-    sha256 = "01p8ym69wf4428wras9ikkvlmsmdq5qkjjkcnv2ywrrk8dz71wnd";
+    version = "0.1.2022112109";
+    sha256 = "1rafygxjdr0hpm0isknvganincxqb71di6nhvnxjs9jk0gg3qlr2";
+  }
+  {
+    name = "material-icon-theme";
+    publisher = "PKief";
+    version = "4.22.0";
+    sha256 = "0irrivfidgjqfd205gh27r2ccj2anvqgvq7lfaaf92wrrc2zvlsk";
   }
   {
     name = "vscode-wakatime";
