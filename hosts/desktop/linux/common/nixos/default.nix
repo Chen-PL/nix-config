@@ -110,5 +110,8 @@
       kbdInteractiveAuthentication = false;
       permitRootLogin = "no";
     };
+
+    # For udiskie
+    udisks2.enable = true;
   };
 }
