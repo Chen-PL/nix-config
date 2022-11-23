@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./alacritty
     ./chromium
     ./micro
     ./nnn
@@ -10,7 +9,6 @@
     ./rofi
     ./sublime-text
     ./xmonad
-    ./zoxide
   ];
 
   programs = {

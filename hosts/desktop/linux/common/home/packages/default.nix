@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    _1password-gui # Multi-platform password manager
     arandr # A simple visual front end for XRandR
     aspell # Spell checker for many languages
     avidemux # Free video editor designed for simple video editing tasks
