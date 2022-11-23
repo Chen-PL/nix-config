@@ -3,6 +3,8 @@
 {
   imports = [
     ../../../common/home
+
+    ./packages
   ];
 
   home = {
