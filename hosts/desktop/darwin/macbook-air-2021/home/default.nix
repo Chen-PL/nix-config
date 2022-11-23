@@ -5,6 +5,7 @@
     ../../../common/home
 
     ./packages
+    ./programs
   ];
 
   home = {

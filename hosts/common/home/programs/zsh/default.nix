@@ -7,7 +7,6 @@
 
     dirHashes = {
       dl = "$HOME/Downloads";
-      hm = "$HOME/.config/nixpkgs";
     };
 
     oh-my-zsh = {
@@ -17,8 +16,6 @@
     };
 
     shellAliases = {
-      update     = "home-manager switch";
-      update-sys = "sudo nixos-rebuild switch";
     };
 
     initExtra = ''
