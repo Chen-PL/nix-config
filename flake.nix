@@ -21,10 +21,6 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
-      pkgs-aarch64-darwin = import nixpkgs {
-        system = "aarch64-darwin";
-        config.allowUnfree = true;
-      };
     in
     {
       nixosConfigurations = {
@@ -36,13 +32,7 @@
             ./hosts/desktop/linux/intel-nuc-12/nixos
           ];
         };
-        macbook-air-2021 = darwin.lib.darwinConfigurations {
-          pkgs = pkgs-aarch64-darwin;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desktop/darwin/macbook-air-2021/nixos
-          ];
-        };
+
         thinkpad-x1c-5th = nixpkgs.lib.nixosSystem {
           pkgs = pkgs-x86_64-linux;
           specialArgs = { inherit inputs; };
@@ -56,6 +46,16 @@
           modules = [
             ./hosts/server/linode/nixos
           ];
+        };
+      };
+
+      darwinConfigurations = {
+        macbook-air-2021 = darwin.lib.darwinConfigurations {
+          system = "aarch64-darwin";
+          modules = [
+            ./hosts/desktop/darwin/macbook-air-2021/macos
+          ];
+          inherit inputs;
         };
       };
 
