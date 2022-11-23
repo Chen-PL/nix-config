@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    _1password-gui # Multi-platform password manager
     arandr # A simple visual front end for XRandR
     aspell # Spell checker for many languages
     avidemux # Free video editor designed for simple video editing tasks
@@ -15,12 +16,10 @@
     mullvad-vpn # Client for Mullvad VPN
     pavucontrol # PulseAudio Volume Control
     playerctl # Command-line utility and library for controlling media players that implement MPRIS
-    screenfetch # Fetches system/theme information in terminal for Linux desktop screenshots
     spotify # Play music from the Spotify music service
     spotify-tui # Spotify for the terminal written in Rust
     stress # Simple workload generator for POSIX systems. It imposes a configurable amount of CPU, memory, I/O, and disk stress on the system
     sublime4 # Sophisticated text editor for code, markup and prose (and Abella)
-    texlive.combined.scheme-full # TeX Live environment for scheme-full
     vlc # Cross-platform media player and streaming server
     xfce.thunar # Xfce file manager
 
@@ -32,8 +31,5 @@
         xmonad-contrib # Community-maintained extensions for xmonad
       ])
     )
-    haskellPackages.stack # The Haskell Tool Stack
-    haskellPackages.cabal-install # The command-line interface for Cabal and Hackage
-    haskellPackages.haskell-language-server # LSP server for GHC
   ];
 }
