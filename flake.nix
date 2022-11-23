@@ -81,6 +81,16 @@
             ./hosts/server/linode/home
           ];
         };
+        "chen@macbook-air-2021" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/desktop/darwin/macbook-air-2021/home
+          ];
+        };
       };
     };
 }
