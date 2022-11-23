@@ -3,6 +3,7 @@
 {
   imports = [
     ./alacritty
+    ./chromium
     ./micro
     ./nnn
     ./rime
