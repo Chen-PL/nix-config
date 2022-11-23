@@ -50,7 +50,7 @@
       };
 
       darwinConfigurations = {
-        macbook-air-2021 = darwin.lib.darwinConfigurations {
+        macbook-air-2021 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
             ./hosts/desktop/darwin/macbook-air-2021/macos
