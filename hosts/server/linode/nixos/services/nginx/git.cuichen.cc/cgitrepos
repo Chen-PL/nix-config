@@ -1,5 +1,5 @@
 repo.url=nix-config
 repo.path=/var/git/nix-config.git
-repo.desc=Chen's Home Manager & NixOS configurations
+repo.desc=Chen's NixOS, Darwin & Home Manager configurations
 repo.clone-url=https://git.cuichen.cc/nix-config
 repo.owner=Chen

@@ -1,5 +1,5 @@
 {
-  description = "Chen's Home Manager & NixOS configurations";
+  description = "Chen's NixOS, Darwin & Home Manager configurations";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -32,7 +32,6 @@
             ./hosts/desktop/linux/intel-nuc-12/nixos
           ];
         };
-
         thinkpad-x1c-5th = nixpkgs.lib.nixosSystem {
           pkgs = pkgs-x86_64-linux;
           specialArgs = { inherit inputs; };
