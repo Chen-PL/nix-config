@@ -6,9 +6,10 @@
     casks = [
       "1password"
       "alfred"
-      "chromium"
+      "google-chrome"
       "mullvadvpn"
       "qq"
+      "spotify"
       "wechat"
     ];
   };
