@@ -7,6 +7,7 @@
       "1password"
       "alfred"
       "chromium"
+      "mullvadvpn"
       "qq"
       "wechat"
     ];
