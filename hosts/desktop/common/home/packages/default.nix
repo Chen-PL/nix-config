@@ -8,6 +8,7 @@ in
 {
   home.packages = with pkgs; [
     abella-modded # Abella theorem prover modded by Jimmy
+    appimage-run
     coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
     htop # An interactive process viewer

@@ -50,6 +50,8 @@ fsmWs :: WorkspaceId
 fsmWs = "fsm"
 thmWs :: WorkspaceId
 thmWs = "thm"
+comWs :: WorkspaceId
+comWs = "com"
 vbxWs :: WorkspaceId
 vbxWs = "vbx"
 musWs :: WorkspaceId
@@ -65,7 +67,7 @@ etcWs = "etc"
 
 
 myWorkspace :: [WorkspaceId]
-myWorkspace = [wwwWs, fsmWs, thmWs, vbxWs, musWs, pdfWs, obsWs, nixWs, etcWs]
+myWorkspace = [wwwWs, fsmWs, thmWs, comWs, vbxWs, musWs, pdfWs, obsWs, nixWs, etcWs]
 
 projects :: [Project]
 projects =
@@ -83,6 +85,11 @@ projects =
       { projectName = thmWs,
         projectDirectory = proofsDir,
         projectStartHook = Just . spawn $ "sublime4 " ++ proofsDir
+      },
+    Project
+      { projectName = comWs,
+        projectDirectory = "~/",
+        projectStartHook = Just . spawn $ "icalingua"
       },
     Project
       { projectName = vbxWs,

@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  icalingua = pkgs.callPackage ./icalingua { };
+in
 {
   home.packages = with pkgs; [
     _1password-gui # Multi-platform password manager
@@ -9,6 +12,7 @@
     blanket # Listen to different sounds
     file # A program that shows the type of files
     geeqie # Lightweight GTK based image viewer
+    icalingua
     jq # A lightweight and flexible command-line JSON processor
     lm_sensors # Tools for reading hardware sensors
     mullvad-vpn # Client for Mullvad VPN
@@ -19,6 +23,7 @@
     spotify # Play music from the Spotify music service
     spotify-tui # Spotify for the terminal written in Rust
     sublime4 # Sophisticated text editor for code, markup and prose (and Abella)
+    tdesktop
     vlc # Cross-platform media player and streaming server
     xfce.thunar # Xfce file manager
 
