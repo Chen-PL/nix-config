@@ -6,5 +6,8 @@
       layoutControl.enabled = false;
     };
     editor.fontFamily = "'FiraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace";
-    nix.enableLanguageServer = true;
+    nix = {
+      enableLanguageServer = true;
+      serverPath = "nil";
+    };
 }

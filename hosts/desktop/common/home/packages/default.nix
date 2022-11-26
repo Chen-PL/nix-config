@@ -13,9 +13,9 @@ in
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
     htop # An interactive process viewer
     mediainfo # Supplies technical and tag information about a video or audio file
+    nil # Yet another language server for Nix
     nixpkgs-fmt # Nix code formatter for nixpkgs
     ott # A tool for the working semanticist
-    rnix-lsp # A work-in-progress language server for Nix, with syntax checking and basic completion
     stress # Simple workload generator for POSIX systems. It imposes a configurable amount of CPU, memory, I/O, and disk stress on the system
     texlive.combined.scheme-full # TeX Live environment for scheme-full
 
