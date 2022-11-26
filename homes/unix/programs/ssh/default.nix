@@ -1,0 +1,17 @@
+{
+  programs.ssh = {
+    matchBlocks = {
+      github = {
+        hostname = "*.github.com";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+
+    matchBlocks = {
+      linode-server = {
+        hostname = "server.cuichen.cc";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+  };
+}

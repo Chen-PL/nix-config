@@ -3,92 +3,68 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hardware.url = "github:nixos/nixos-hardware";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = { nixpkgs, darwin, home-manager, ... }@inputs:
+  outputs = { self, ... }@inputs:
     let
-      pkgs-x86_64-linux = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
+      inherit (self) outputs;
+      lib = import ./lib.nix inputs outputs;
     in
     {
+      packages = lib.packages;
+      devShells = lib.devShells;
+
+      overlays = import ./overlays;
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+
       nixosConfigurations = {
-        intel-nuc-12 = nixpkgs.lib.nixosSystem {
-          pkgs = pkgs-x86_64-linux;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./devices/lg-42c2
-            ./hosts/desktop/linux/intel-nuc-12/nixos
-          ];
+        intel-nuc-12 = lib.mkNixosConfig {
+          hostname = "intel-nuc-12";
         };
-        thinkpad-x1c-5th = nixpkgs.lib.nixosSystem {
-          pkgs = pkgs-x86_64-linux;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desktop/linux/thinkpad-x1c-5th/nixos
-          ];
+        thinkpad-x1c-5th = lib.mkNixosConfig {
+          hostname = "thinkpad-x1c-5th";
         };
-        linode = nixpkgs.lib.nixosSystem {
-          pkgs = pkgs-x86_64-linux;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/server/linode/nixos
-          ];
+        linode-server = lib.mkNixosConfig {
+          hostname = "linode-server";
+          server = true;
         };
       };
 
       darwinConfigurations = {
-        macbook-air-2021 = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            ./hosts/desktop/darwin/macbook-air-2021/macos
-          ];
-          inherit inputs;
+        macbook-air-2021 = lib.mkDarwinConfig {
+          hostname = "macbook-air-2021";
         };
       };
 
       homeConfigurations = {
-        "chen@intel-nuc-12" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desktop/linux/intel-nuc-12/home
-          ];
+        "chen@intel-nuc-12" = lib.mkHomeConfig {
+          hostname = "intel-nuc-12";
         };
-        "chen@thinkpad-x1c-5th" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desktop/linux/thinkpad-x1c-5th/home
-          ];
+        "chen@thinkpad-x1c-5th" = lib.mkHomeConfig {
+          hostname = "thinkpad-x1c-5th";
         };
-        "chen@linode" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/server/linode/home
-          ];
+        "chen@linode-server" = lib.mkHomeConfig {
+          hostname = "linode-server";
+          server = true;
         };
-        "chen@macbook-air-2021" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "aarch64-darwin";
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desktop/darwin/macbook-air-2021/home
-          ];
+        "chen@macbook-air-2021" = lib.mkHomeConfig {
+          arch = "aarch64";
+          platform = "darwin";
+          hostname = "macbook-air-2021";
         };
       };
     };
