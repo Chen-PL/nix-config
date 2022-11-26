@@ -62,8 +62,8 @@
   {
     name = "remote-ssh";
     publisher = "ms-vscode-remote";
-    version = "0.93.2022111815";
-    sha256 = "1rwffyc62zfn608ch87gwll4nfgfsrrg7bl06cf2kq1xzgi3k0if";
+    version = "0.93.2022112215";
+    sha256 = "13h2ciq94q6l7kslalw01ai889cxvfsyb7h76yg8lkdcn8s8c09l";
   }
   {
     name = "remote-ssh-edit";
@@ -74,14 +74,20 @@
   {
     name = "remote-explorer";
     publisher = "ms-vscode";
-    version = "0.1.2022112109";
-    sha256 = "1rafygxjdr0hpm0isknvganincxqb71di6nhvnxjs9jk0gg3qlr2";
+    version = "0.1.2022112409";
+    sha256 = "1b54ps2lyzq35q51hl4rv0klhnbps47692pzwajbalnmbla5jigg";
   }
   {
     name = "material-icon-theme";
     publisher = "PKief";
     version = "4.22.0";
     sha256 = "0irrivfidgjqfd205gh27r2ccj2anvqgvq7lfaaf92wrrc2zvlsk";
+  }
+  {
+    name = "vscode-counter";
+    publisher = "uctakeoff";
+    version = "3.1.0";
+    sha256 = "08zbnrh88nz2v6dc771i9f7shkhhbqpwbspkla1m2005qqin20gl";
   }
   {
     name = "vscode-wakatime";
