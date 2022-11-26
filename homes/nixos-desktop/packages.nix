@@ -1,7 +1,7 @@
-{ pkgs, customPkgs, ... }:
+{ pkgs, ... }:
 
-let
-  packages = with pkgs; [
+{
+  home.packages = with pkgs; [
     _1password-gui # Multi-platform password manager
     arandr # A simple visual front end for XRandR
     aspell # Spell checker for many languages
@@ -32,11 +32,4 @@ let
       ])
     )
   ];
-
-  customPackages = with customPkgs; [
-    icalingua
-  ];
-in
-{
-  home.packages = packages ++ customPackages;
 }

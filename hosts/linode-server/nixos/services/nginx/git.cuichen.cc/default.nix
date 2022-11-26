@@ -1,7 +1,7 @@
-{ config, lib, pkgs, customPkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-  cgitPkg = customPkgs.cgit;
+  cgitPkg = pkgs.cgit-default-theme;
   configFile = pkgs.writeText "cgitrc" (import ./cgitrc.nix cgitPkg);
 in
 {

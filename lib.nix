@@ -6,6 +6,7 @@ let
   nixosTags = server: [ "unix" "nixos" ] ++
     (if server then [ "nixos-server" ] else [ "desktop" "nixos-desktop" ]);
   darwinTags = [ "unix" "desktop" "darwin-desktop" ];
+  defaultSpecialArgs = { inherit inputs outputs; };
 in
 rec {
   architectures = [ "aarch64" "x86_64" ];
@@ -19,14 +20,12 @@ rec {
   );
   packages = importWithPkgs ./pkgs;
   devShells = importWithPkgs ./shell.nix;
+  overlays = import ./overlays;
 
   mkPkgs = system: import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
-  };
-  mkSpecialArgs = system: {
-    inherit inputs outputs;
-    customPkgs = packages.${system};
+    overlays = with overlays; [ additions modifications ];
   };
 
   mkNixosConfig = { arch ? "x86_64", hostname, server ? false, specialArgs ? { } }:
@@ -37,7 +36,7 @@ rec {
     inputs.nixpkgs.lib.nixosSystem {
       pkgs = mkPkgs system;
       modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ];
-      specialArgs = mkSpecialArgs system // specialArgs;
+      specialArgs = defaultSpecialArgs // specialArgs;
     };
 
   mkDarwinConfig = { arch ? "aarch64", hostname, specialArgs ? { } }:
@@ -49,7 +48,7 @@ rec {
       inherit system;
       pkgs = mkPkgs system;
       modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ];
-      specialArgs = mkSpecialArgs system // specialArgs;
+      specialArgs = defaultSpecialArgs // specialArgs;
     };
 
   mkHomeConfig = { arch ? "x86_64", platform ? "linux", hostname, server ? false, specialArgs ? { } }:
@@ -62,6 +61,6 @@ rec {
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs system;
       modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ];
-      extraSpecialArgs = mkSpecialArgs system // specialArgs;
+      extraSpecialArgs = defaultSpecialArgs // specialArgs;
     };
 }

@@ -1,14 +1,21 @@
-# This file defines overlays
 {
-  # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
+    abella-modded = prev.abella.overrideAttrs (oldAttrs: {
+      src = prev.fetchFromGitHub {
+        owner = "JimmyZJX";
+        repo = "abella";
+        rev = "c64dad15e2351433ab11fb716347fe54a8fec11e";
+        hash = "sha256-z7oO7pqjZEcZY2+W1T/T6GpY3eqRuTq5lVf7eLit5VU=";
+      };
+    });
+
+    cgit-default-theme = prev.cgit.overrideAttrs (oldAttrs: {
+      postPatch = oldAttrs.postPatch + ''
+        substituteInPlace filters/syntax-highlighting.py \
+          --replace 'pastie' 'default'
+      '';
+    });
   };
 }

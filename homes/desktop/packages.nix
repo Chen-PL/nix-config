@@ -1,7 +1,8 @@
-{ pkgs, customPkgs, ... }:
+{ pkgs, ... }:
 
-let
-  packages = with pkgs; [
+{
+  home.packages = with pkgs; [
+    cgit-default-theme
     appimage-run
     coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
@@ -27,11 +28,4 @@ let
     haskellPackages.cabal-install # The command-line interface for Cabal and Hackage
     haskellPackages.haskell-language-server # LSP server for GHC
   ];
-
-  customPackages = with customPkgs; [
-    abella-modded # Abella theorem prover modded by Jimmy
-  ];
-in
-{
-  home.packages = packages ++ customPackages;
 }
