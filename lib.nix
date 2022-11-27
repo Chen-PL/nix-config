@@ -6,13 +6,14 @@ let
   inherit (inputs.darwin.lib) darwinSystem;
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
   inherit (nixpkgs.lib) genAttrs nixosSystem;
-  inherit (nixpkgs.lib.attrsets) mapAttrs' nameValuePair;
+  inherit (nixpkgs.lib.attrsets) filterAttrs mapAttrs' nameValuePair;
 
   withPrefix = prefix: map (tag: ./${prefix}/${tag});
   concatWithDash = x: y: "${x}-${y}";
   nixosTags = server: [ "unix" "nixos" ] ++
     (if server then [ "nixos-server" ] else [ "desktop" "nixos-desktop" ]);
   darwinTags = [ "unix" "desktop" "darwin-desktop" ];
+  filterArgs = filterAttrs (n: v: !(elem n [ "arch" "server" ]));
   defaultSpecialArgs = { inherit inputs outputs; };
   mkOverlays = tag:
     let overlays = import ./overlays/${tag}; in
@@ -46,15 +47,15 @@ rec {
       overlays = concatMap mkOverlays [ "unix" platform ];
     };
 
-  mkNixosConfig = { arch ? "x86_64", username, hostname, server ? false, specialArgs ? { }, ... }:
+  mkNixosConfig = args@{ arch ? "x86_64", username, hostname, server ? false, ... }:
     assert elem arch architectures;
     nixosSystem {
       pkgs = mkPkgs arch "linux";
       modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ];
-      specialArgs = defaultSpecialArgs // { inherit username hostname; } // specialArgs;
+      specialArgs = defaultSpecialArgs // (filterArgs args);
     };
 
-  mkDarwinConfig = { arch ? "aarch64", username, hostname, specialArgs ? { }, ... }:
+  mkDarwinConfig = args@{ arch ? "aarch64", username, hostname, ... }:
     assert elem arch architectures;
     let
       system = concatWithDash arch "darwin";
@@ -63,10 +64,10 @@ rec {
       inherit system;
       pkgs = mkPkgs arch "darwin";
       modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ];
-      specialArgs = defaultSpecialArgs // { inherit username hostname; } // specialArgs;
+      specialArgs = defaultSpecialArgs // (filterArgs args);
     };
 
-  mkHomeConfig = { arch ? "x86_64", platform ? "linux", username, hostname, server ? false, specialArgs ? { }, ... }:
+  mkHomeConfig = args@{ arch ? "x86_64", platform ? "linux", username, hostname, server ? false, ... }:
     assert elem arch architectures;
     assert elem platform platforms;
     let
@@ -75,7 +76,7 @@ rec {
     homeManagerConfiguration {
       pkgs = mkPkgs arch platform;
       modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ];
-      extraSpecialArgs = defaultSpecialArgs // { inherit username hostname; } // specialArgs;
+      extraSpecialArgs = defaultSpecialArgs // (filterArgs args);
     };
 
   mkNixosConfigs = mkConfigs mkNixosConfig false;

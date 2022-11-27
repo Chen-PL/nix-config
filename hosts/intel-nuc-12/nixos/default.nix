@@ -9,8 +9,6 @@
     ./hardware-configuration.nix
   ];
 
-  system.stateVersion = "22.11";
-
   boot = {
     loader = {
       systemd-boot.enable = true;

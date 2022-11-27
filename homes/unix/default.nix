@@ -1,10 +1,10 @@
-{ username, ... }:
+{ username, stateVersion, ... }:
 
 {
   imports = [ ./programs ];
 
   home = {
-    inherit username;
+    inherit username stateVersion;
     sessionPath = [ "$HOME/bin" ];
   };
 }

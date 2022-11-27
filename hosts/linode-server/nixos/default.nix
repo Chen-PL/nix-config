@@ -6,8 +6,6 @@
     ./services
   ];
 
-  system.stateVersion = "22.11";
-
   boot = {
     loader = {
       grub = {
@@ -29,7 +27,6 @@
   };
 
   networking = {
-    hostName = "linode-server";
     useDHCP = false;
     interfaces.eth0.useDHCP = true;
     usePredictableInterfaceNames = false;
@@ -37,13 +34,6 @@
 
   time.timeZone = "Asia/Hong_Kong";
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # Diagnostic Tools
-  environment.systemPackages = with pkgs; [
-    inetutils
-    mtr
-    sysstat
-  ];
 
   users.groups.git.members = [ "chen" ];
 }

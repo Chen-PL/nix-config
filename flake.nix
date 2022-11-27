@@ -18,7 +18,7 @@
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = { self, ... }@inputs:
+  outputs = inputs@{ self, ... }:
     let
       inherit (self) outputs;
       lib = import ./lib.nix inputs outputs;
@@ -26,12 +26,29 @@
       hosts = {
         username = "chen";
         nixos = {
-          intel-nuc-12     = { arch = "x86_64";  platform = "linux"; };
-          thinkpad-x1c-5th = { arch = "x86_64";  platform = "linux"; };
-          linode-server    = { arch = "x86_64";  platform = "linux";  server = true; };
+          intel-nuc-12 = {
+            arch = "x86_64";
+            platform = "linux";
+            stateVersion = "22.11";
+          };
+          thinkpad-x1c-5th = {
+            arch = "x86_64";
+            platform = "linux";
+            stateVersion = "22.11";
+          };
+          linode-server = {
+            server = true;
+            arch = "x86_64";
+            platform = "linux";
+            stateVersion = "22.11";
+          };
         };
         darwin = {
-          macbook-air-2021 = { arch = "aarch64"; platform = "darwin"; };
+          macbook-air-2021 = {
+            arch = "aarch64";
+            platform = "darwin";
+            stateVersion = "22.11";
+          };
         };
       };
     in

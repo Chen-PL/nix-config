@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, hostname, username, ... }:
+{ inputs, lib, config, pkgs, hostname, username, stateVersion, ... }:
 
 {
   nix = {
@@ -17,4 +17,6 @@
     name = username;
     shell = pkgs.zsh;
   };
+
+  system.stateVersion = lib.mkDefault stateVersion;
 }
