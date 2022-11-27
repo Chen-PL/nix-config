@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    cgit-default-theme
-    appimage-run
     coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
     htop # An interactive process viewer
