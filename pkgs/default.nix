@@ -1,3 +1,7 @@
-{ pkgs ? (import ../nixpkgs.nix) { } }: {
-  icalingua = pkgs.callPackage ./icalingua {};
-}
+{ pkgs ? (import ../nixpkgs.nix) { } }:
+
+let
+  merge = builtins.foldl' (total: sub: total // (import sub { inherit pkgs; })) { };
+  subPackages = [ ./unix ./linux ./darwin ];
+in
+merge subPackages

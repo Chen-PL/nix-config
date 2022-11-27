@@ -1,21 +1,11 @@
+let
+  mergeMod = subs: final: prev:
+    builtins.foldl' (mods: sub: mods // (import sub.modifications final prev)) { } subs;
+  mergeAdd = subs: final: prev:
+    builtins.foldl' (adds: sub: adds // (import sub.additions final prev)) { } subs;
+  subs = [ ./unix ./linux ./darwin ];
+in
 {
-  additions = final: _prev: import ../pkgs { pkgs = final; };
-
-  modifications = final: prev: {
-    abella-modded = prev.abella.overrideAttrs (oldAttrs: {
-      src = prev.fetchFromGitHub {
-        owner = "JimmyZJX";
-        repo = "abella";
-        rev = "c64dad15e2351433ab11fb716347fe54a8fec11e";
-        hash = "sha256-z7oO7pqjZEcZY2+W1T/T6GpY3eqRuTq5lVf7eLit5VU=";
-      };
-    });
-
-    cgit-default-theme = prev.cgit.overrideAttrs (oldAttrs: {
-      postPatch = oldAttrs.postPatch + ''
-        substituteInPlace filters/syntax-highlighting.py \
-          --replace 'pastie' 'default'
-      '';
-    });
-  };
+  additions = mergeAdd subs;
+  modifications = mergeMod subs;
 }
