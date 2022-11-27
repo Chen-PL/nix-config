@@ -23,15 +23,17 @@
       inherit (self) outputs;
       lib = import ./lib.nix inputs outputs;
 
-      nixosHosts = {
-        intel-nuc-12 = { arch = "x86_64"; platform = "linux"; };
-        thinkpad-x1c-5th = { arch = "x86_64"; platform = "linux"; };
-        linode-server = { arch = "x86_64"; platform = "linux"; server = true; };
+      hosts = {
+        username = "chen";
+        nixos = {
+          intel-nuc-12     = { arch = "x86_64";  platform = "linux"; };
+          thinkpad-x1c-5th = { arch = "x86_64";  platform = "linux"; };
+          linode-server    = { arch = "x86_64";  platform = "linux";  server = true; };
+        };
+        darwin = {
+          macbook-air-2021 = { arch = "aarch64"; platform = "darwin"; };
+        };
       };
-      darwinHosts = {
-        macbook-air-2021 = { arch = "aarch64"; platform = "darwin"; };
-      };
-      username = "chen";
     in
     {
       packages = lib.packages;
@@ -41,8 +43,8 @@
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
-      nixosConfigurations = lib.mkNixosConfigs nixosHosts;
-      darwinConfigurations = lib.mkDarwinConfigs darwinHosts;
-      homeConfigurations = lib.mkHomeConfigs username (nixosHosts // darwinHosts);
+      nixosConfigurations = lib.mkNixosConfigs hosts.nixos;
+      darwinConfigurations = lib.mkDarwinConfigs hosts.darwin;
+      homeConfigurations = lib.mkHomeConfigs hosts.username (hosts.nixos // hosts.darwin);
     };
 }
