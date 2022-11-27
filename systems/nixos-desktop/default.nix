@@ -1,36 +1,10 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, hostname, username, ... }:
 
 {
   imports = [
     ./locale
     ./xserver
   ];
-
-  nix = {
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-
-    settings = {
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-  };
-
-  networking = {
-    networkmanager.enable = true;
-
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [ 22 80 443 ];
-      # allowedUDPPorts = [ ... ];
-    };
-  };
 
   console = {
     font = "Lat2-Terminus16";
@@ -47,23 +21,11 @@
     support32Bit = true;
   };
 
-  users.users = {
-    chen = {
-      isNormalUser = true;
-      shell = pkgs.zsh;
-
-      # BEWARE that the docker group membership is effectively equivalent to being root!
-      extraGroups = [ "audio" "docker" "networkmanager" "vboxusers" "wheel" ];
-
-      openssh.authorizedKeys.keys = [
-      ];
-    };
-  };
-
-  # Bootstrap packages
-  environment.systemPackages = with pkgs; [
-    git
-    wget
+  users.users.${username}.extraGroups = [
+    "audio"
+    "docker" # equivalent to being root!
+    "networkmanager"
+    "vboxusers"
   ];
 
   virtualisation = {
@@ -87,15 +49,6 @@
   programs.dconf.enable = true;
 
   services = {
-    fail2ban = {
-      enable = true;
-      maxretry = 5;
-      ignoreIP = [
-        "127.0.0.0/8"
-        "192.168.0.0/16"
-      ];
-    };
-
     # For 1Password (otherwise it keeps asking for two-refactor)
     gnome.gnome-keyring.enable = true;
 
@@ -104,14 +57,11 @@
       package = pkgs.mullvad-vpn;
     };
 
-    openssh = {
-      enable = true;
-      passwordAuthentication = false;
-      kbdInteractiveAuthentication = false;
-      permitRootLogin = "no";
-    };
-
     # For udiskie
     udisks2.enable = true;
   };
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }

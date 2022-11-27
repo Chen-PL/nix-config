@@ -26,4 +26,6 @@
     haskellPackages.cabal-install # The command-line interface for Cabal and Hackage
     haskellPackages.haskell-language-server # LSP server for GHC
   ];
+
+  fonts.fontconfig.enable = true;
 }

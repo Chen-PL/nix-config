@@ -35,7 +35,7 @@
         };
       };
     in
-    {
+    with hosts; {
       packages = lib.packages;
       devShells = lib.importWithPkgs ./shell.nix;
 
@@ -43,8 +43,8 @@
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
-      nixosConfigurations = lib.mkNixosConfigs hosts.nixos;
-      darwinConfigurations = lib.mkDarwinConfigs hosts.darwin;
-      homeConfigurations = lib.mkHomeConfigs hosts.username (hosts.nixos // hosts.darwin);
+      nixosConfigurations = lib.mkNixosConfigs username nixos;
+      darwinConfigurations = lib.mkDarwinConfigs username darwin;
+      homeConfigurations = lib.mkHomeConfigs username (nixos // darwin);
     };
 }

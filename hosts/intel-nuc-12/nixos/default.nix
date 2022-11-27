@@ -23,12 +23,9 @@
     initrd.kernelModules = [ "kvm-intel" ];
   };
 
-  networking = {
-    hostName = "intel-nuc-12";
-    interfaces = {
-      enp86s0.useDHCP = lib.mkDefault true;
-      wlo1.useDHCP = lib.mkDefault true;
-    };
+  networking.interfaces = {
+    enp86s0.useDHCP = lib.mkDefault true;
+    wlo1.useDHCP = lib.mkDefault true;
   };
 
   # Video settings
@@ -45,18 +42,4 @@
     ];
   };
   services.xserver.videoDrivers = [ "modesetting" ];
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
-  # HiDPI
-  hardware.video.hidpi.enable = true;
-  services.xserver.dpi = 180;
-
-  environment.variables = {
-    GDK_SCALE = "2";
-    GDK_DPI_SCALE = "0.5";
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    QT_SCALE_FACTOR = "2";
-  };
 }

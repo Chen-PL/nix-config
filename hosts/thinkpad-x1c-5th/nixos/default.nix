@@ -23,16 +23,8 @@
     initrd.kernelModules = [ "kvm-intel" ];
   };
 
-  networking = {
-    hostName = "thinkpad-x1c-5th";
-    interfaces = {
-      enp0s31f6.useDHCP = lib.mkDefault true;
-      wlp4s0.useDHCP = lib.mkDefault true;
-    };
+  networking.interfaces = {
+    enp0s31f6.useDHCP = lib.mkDefault true;
+    wlp4s0.useDHCP = lib.mkDefault true;
   };
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
-  services.xserver.libinput.enable = true;
 }
