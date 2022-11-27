@@ -22,50 +22,27 @@
     let
       inherit (self) outputs;
       lib = import ./lib.nix inputs outputs;
+
+      nixosHosts = {
+        intel-nuc-12 = { arch = "x86_64"; platform = "linux"; };
+        thinkpad-x1c-5th = { arch = "x86_64"; platform = "linux"; };
+        linode-server = { arch = "x86_64"; platform = "linux"; server = true; };
+      };
+      darwinHosts = {
+        macbook-air-2021 = { arch = "aarch64"; platform = "darwin"; };
+      };
+      username = "chen";
     in
     {
       packages = lib.packages;
-      devShells = lib.devShells;
+      devShells = lib.importWithPkgs ./shell.nix;
 
       overlays = import ./overlays;
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
-      nixosConfigurations = {
-        intel-nuc-12 = lib.mkNixosConfig {
-          hostname = "intel-nuc-12";
-        };
-        thinkpad-x1c-5th = lib.mkNixosConfig {
-          hostname = "thinkpad-x1c-5th";
-        };
-        linode-server = lib.mkNixosConfig {
-          hostname = "linode-server";
-          server = true;
-        };
-      };
-
-      darwinConfigurations = {
-        macbook-air-2021 = lib.mkDarwinConfig {
-          hostname = "macbook-air-2021";
-        };
-      };
-
-      homeConfigurations = {
-        "chen@intel-nuc-12" = lib.mkHomeConfig {
-          hostname = "intel-nuc-12";
-        };
-        "chen@thinkpad-x1c-5th" = lib.mkHomeConfig {
-          hostname = "thinkpad-x1c-5th";
-        };
-        "chen@linode-server" = lib.mkHomeConfig {
-          hostname = "linode-server";
-          server = true;
-        };
-        "chen@macbook-air-2021" = lib.mkHomeConfig {
-          arch = "aarch64";
-          platform = "darwin";
-          hostname = "macbook-air-2021";
-        };
-      };
+      nixosConfigurations = lib.mkNixosConfigs nixosHosts;
+      darwinConfigurations = lib.mkDarwinConfigs darwinHosts;
+      homeConfigurations = lib.mkHomeConfigs username (nixosHosts // darwinHosts);
     };
 }
