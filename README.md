@@ -8,7 +8,7 @@
 intel-nuc-12
 macbook-air-2021
 thinkpad-x1c-5th
-linode
+linode-server
 ```
 
 This configuration is flake-based, so you may check the output of this configuration by running:
@@ -29,7 +29,7 @@ $ cd nix-config
 
 If you don't have flake or home-manager enabled in your current system, you may run
 ```console
-$ nix-shell
+$ nix develop
 ```
 to enter the bootstrap envitonment.
 

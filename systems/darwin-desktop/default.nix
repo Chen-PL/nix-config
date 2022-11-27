@@ -1,9 +1,7 @@
 { username, ... }:
 
 {
-  imports = [
-    ./brew
-  ];
+  imports = [ ./brew ];
 
   users.users.${username} = {
     home = "/Users/${username}";

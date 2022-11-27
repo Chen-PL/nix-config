@@ -1,15 +1,7 @@
-{ inputs, lib, config, pkgs, hostname, username, stateVersion, ... }:
+{ lib, pkgs, hostname, username, stateVersion, ... }:
 
 {
-  nix = {
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
-    settings = {
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-  };
+  imports = [ "nix.nix" ];
 
   networking.hostName = hostname;
 
