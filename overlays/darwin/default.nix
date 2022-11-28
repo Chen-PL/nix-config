@@ -7,12 +7,12 @@
     in
     {
       sublime4 = installApplication {
-        name = "sublimetext4";
+        name = "Sublime Text";
         version = "4143";
         sourceRoot = "Sublime Text.app";
         src = prev.fetchurl {
           url = "https://download.sublimetext.com/sublime_text_build_4143_mac.zip";
-          sha256 = "0xizsq75dws08x6q7zss2rik9rd6365w1y2haa08hqnjzkf7yb8x";
+          sha256 = "sha256-K9VLq8ayc2ToDEwQfOG0ACZmI3H1bDXiWyn967KUKxk=";
         };
         description = "Sophisticated text editor for code, markup and prose";
         homepage = "https://www.sublimetext.com/";

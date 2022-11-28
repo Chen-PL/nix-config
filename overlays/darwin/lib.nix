@@ -23,7 +23,7 @@ final: prev:
           mkdir -p "$out/Applications/${appname}.app"
           cp -pR * "$out/Applications/${appname}.app"
         '' + postInstall;
-        meta = with super.lib; {
+        meta = with prev.lib; {
           description = description;
           homepage = homepage;
           maintainers = with maintainers; [ jwiegley ];
