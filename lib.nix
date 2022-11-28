@@ -46,37 +46,55 @@ rec {
       overlays = concatMap mkOverlays [ "unix" platform ];
     };
 
-  mkNixosConfig = args@{ arch ? "x86_64", username, hostname, server ? false, ... }:
-    assert elem arch architectures;
-    nixosSystem {
-      pkgs = mkPkgs arch "linux";
-      modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ];
-      specialArgs = defaultSpecialArgs // (filterArgs args);
-    };
+  mkNixosConfig =
+    { arch ? "x86_64"
+    , username
+    , hostname
+    , server ? false
+    , ...
+    }@args:
+      assert elem arch architectures;
+      nixosSystem {
+        pkgs = mkPkgs arch "linux";
+        modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ];
+        specialArgs = defaultSpecialArgs // (filterArgs args);
+      };
 
-  mkDarwinConfig = args@{ arch ? "aarch64", username, hostname, ... }:
-    assert elem arch architectures;
-    let
-      system = concatWithDash arch "darwin";
-    in
-    darwinSystem {
-      inherit system;
-      pkgs = mkPkgs arch "darwin";
-      modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ];
-      specialArgs = defaultSpecialArgs // (filterArgs args);
-    };
+  mkDarwinConfig =
+    { arch ? "aarch64"
+    , username
+    , hostname
+    , ...
+    }@args:
+      assert elem arch architectures;
+      let
+        system = concatWithDash arch "darwin";
+      in
+      darwinSystem {
+        inherit system;
+        pkgs = mkPkgs arch "darwin";
+        modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ];
+        specialArgs = defaultSpecialArgs // (filterArgs args);
+      };
 
-  mkHomeConfig = args@{ arch ? "x86_64", platform ? "linux", username, hostname, server ? false, ... }:
-    assert elem arch architectures;
-    assert elem platform platforms;
-    let
-      tags = if platform == "linux" then nixosTags server else darwinTags;
-    in
-    homeManagerConfiguration {
-      pkgs = mkPkgs arch platform;
-      modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ];
-      extraSpecialArgs = defaultSpecialArgs // (filterArgs args);
-    };
+  mkHomeConfig =
+    { arch ? "x86_64"
+    , platform ? "linux"
+    , username
+    , hostname
+    , server ? false
+    , ...
+    }@args:
+      assert elem arch architectures;
+      assert elem platform platforms;
+      let
+        tags = if platform == "linux" then nixosTags server else darwinTags;
+      in
+      homeManagerConfiguration {
+        pkgs = mkPkgs arch platform;
+        modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ];
+        extraSpecialArgs = defaultSpecialArgs // (filterArgs args);
+      };
 
   mkNixosConfigs = mkConfigs mkNixosConfig false;
   mkDarwinConfigs = mkConfigs mkDarwinConfig false;
