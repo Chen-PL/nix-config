@@ -33,7 +33,6 @@ rec {
     let pkgs = nixpkgs.legacyPackages.${system};
     in import path { inherit pkgs; }
   );
-  packages = importWithPkgs ./pkgs;
 
   mkPkgs = arch: platform:
     assert elem arch architectures;

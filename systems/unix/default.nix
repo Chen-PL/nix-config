@@ -1,7 +1,7 @@
 { lib, pkgs, hostname, username, stateVersion, ... }:
 
 {
-  imports = [ "nix.nix" ];
+  imports = [ ./nix.nix ];
 
   networking.hostName = hostname;
 

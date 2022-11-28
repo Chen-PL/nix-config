@@ -21,7 +21,8 @@
   outputs = inputs@{ self, ... }:
     let
       inherit (self) outputs;
-      lib = import ./lib.nix inputs outputs;
+      inherit (import ./lib.nix inputs outputs)
+        importWithPkgs mkNixosConfigs mkDarwinConfigs mkHomeConfigs;
 
       hosts = {
         username = "chen";
@@ -53,15 +54,15 @@
       };
     in
     with hosts; {
-      packages = lib.packages;
-      devShells = lib.importWithPkgs ./shell.nix;
+      packages = importWithPkgs ./pkgs;
+      devShells = importWithPkgs ./shell.nix;
 
       overlays = import ./overlays;
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
-      nixosConfigurations = lib.mkNixosConfigs username nixos;
-      darwinConfigurations = lib.mkDarwinConfigs username darwin;
-      homeConfigurations = lib.mkHomeConfigs username (nixos // darwin);
+      nixosConfigurations = mkNixosConfigs username nixos;
+      darwinConfigurations = mkDarwinConfigs username darwin;
+      homeConfigurations = mkHomeConfigs username (nixos // darwin);
     };
 }
