@@ -2,7 +2,7 @@ inputs: outputs:
 
 let
   inherit (builtins) elem concatMap;
-  inherit (inputs) nixpkgs;
+  inherit (inputs) nixpkgs nur;
   inherit (inputs.darwin.lib) darwinSystem;
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
   inherit (nixpkgs.lib) genAttrs nixosSystem;
@@ -89,11 +89,16 @@ rec {
       assert elem platform platforms;
       let
         tags = if platform == "linux" then nixosTags server else darwinTags;
+        pkgs = mkPkgs arch platform;
+        nur-modules = import nur { inherit pkgs; nurpkgs = pkgs; };
+        homeSpecialArgs = {
+          firefox-addons = nur-modules.repos.rycee.firefox-addons;
+        };
       in
       homeManagerConfiguration {
-        pkgs = mkPkgs arch platform;
+        inherit pkgs;
         modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ];
-        extraSpecialArgs = defaultSpecialArgs // (filterArgs args);
+        extraSpecialArgs = defaultSpecialArgs // homeSpecialArgs // (filterArgs args);
       };
 
   mkNixosConfigs = mkConfigs mkNixosConfig false;
