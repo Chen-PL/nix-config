@@ -11,7 +11,7 @@ let
   settingModules = [
     ./abella
     ./ayu
-    ./nord
+    # ./nord
     ./package-control
     ./preferences
   ];

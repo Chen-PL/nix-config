@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    abella-modded # Interactive theorem prover (modded by Jimmy)
     coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
     htop # An interactive process viewer
@@ -10,6 +11,7 @@
     nixpkgs-fmt # Nix code formatter for nixpkgs
     ott # A tool for the working semanticist
     stress # Simple workload generator for POSIX systems. It imposes a configurable amount of CPU, memory, I/O, and disk stress on the system
+    sublime4 # Sophisticated text editor for code, markup and prose (and Abella)
     texlive.combined.scheme-full # TeX Live environment for scheme-full
 
     # Fonts

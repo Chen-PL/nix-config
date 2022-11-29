@@ -1,5 +1,7 @@
 {
   "Nord.sublime-color-scheme" = {
+    variables = { };
+    globals = { };
     rules = [
       {
         name = "[Keyword] Abella";
@@ -9,8 +11,8 @@
       {
         name = "Proven with Abella";
         scope = "meta.abella.proven";
-        foreground = "var(nord10)";
-        background = "var(nord10)";
+        foreground = "#344D67";
+        background = "#344D67";
       }
       {
         name = "Modified with Abella";
