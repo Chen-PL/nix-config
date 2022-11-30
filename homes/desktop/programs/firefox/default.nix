@@ -1,35 +1,45 @@
 { pkgs, firefox-addons, ... }:
 
 {
+  imports = [
+    ./search-engines.nix
+  ];
+
   programs.firefox = {
     enable = true;
     package = pkgs.firefox;
+
     extensions = with firefox-addons; [
-      i-dont-care-about-cookies
+      facebook-container
       onepassword-password-manager
+      theme-nord-polar-night
+      translate-web-pages
       ublock-origin
     ];
 
-    profiles = {
-      default = {
-        id = 0;
+    profiles.default = {
+      id = 0;
+      isDefault = true;
 
-        settings = {
-          "browser.bookmarks.showMobileBookmarks" = true; # Mobile bookmarks
-          "browser.download.useDownloadDir" = false; # Ask for download location
-          "browser.in-content.dark-mode" = true; # Dark mode
-          "browser.newtabpage.activity-stream.feeds.section.topstories" = false; # Disable top stories
-          "browser.newtabpage.activity-stream.feeds.sections" = false;
-          "browser.newtabpage.activity-stream.feeds.system.topstories" = false; # Disable top stories
-          "browser.newtabpage.activity-stream.section.highlights.includePocket" = false; # Disable pocket
-          "extensions.pocket.enabled" = false; # Disable pocket
-          "media.eme.enabled" = true; # Enable DRM
-          "media.gmp-widevinecdm.visible" = true; # Enable DRM
-          "media.gmp-widevinecdm.enabled" = true; # Enable DRM
-          "signon.autofillForms" = false; # Disable built-in form-filling
-          "signon.rememberSignons" = false; # Disable built-in password manager
-          "ui.systemUsesDarkTheme" = true; # Dark mode
-        };
+      bookmarks = import ./bookmarks.nix;
+      settings = {
+        "browser.tabs.loadBookmarksInTabs" = true; # Opening bookmarks in new tabs
+        "browser.tabs.firefox-view" = false;
+        "browser.newtabpage.activity-stream.section.highlights.includePocket" = false; # Disable pocket
+        "extensions.pocket.enabled" = false; # Disable pocket
+        "identity.fxaccounts.enabled" = false; # Disable Firefox accounts integration
+        "media.eme.enabled" = true; # Enable DRM
+        "media.gmp-widevinecdm.visible" = true; # Enable DRM
+        "media.gmp-widevinecdm.enabled" = true; # Enable DRM
+        "media.videocontrols.picture-in-picture.video-toggle.always-show" = true; # Always shows the Picture in Picture toggle
+        "narrate.enabled" = false; # Disable text to speech in reader mode
+        "signon.autofillForms" = false; # Disable built-in form-filling
+        "signon.rememberSignons" = false; # Disable built-in password manager
+        "ui.systemUsesDarkTheme" = true; # Dark mode
+      };
+
+      search = {
+        default = "Google";
       };
     };
   };
