@@ -23,6 +23,7 @@
     openssh.authorizedKeys.keys = [
       # intel-nuc-12
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDi/dd1Nba5SDPMdQBXjgZsFDmB5WIkrs2g+oZm8hNTP cuichen"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJiGou+kbjM9Q8TJsVcXwHlfXjGDwEbwo2BQ/xnOq8jd chen"
     ];
   };
 
