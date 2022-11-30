@@ -92,7 +92,7 @@ rec {
         pkgs = mkPkgs arch platform;
         nur-modules = import nur { inherit pkgs; nurpkgs = pkgs; };
         homeSpecialArgs = {
-          firefox-addons = nur-modules.repos.rycee.firefox-addons;
+          inherit (nur-modules.repos.rycee) firefox-addons;
         };
       in
       homeManagerConfiguration {
