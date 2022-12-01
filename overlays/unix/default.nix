@@ -3,6 +3,7 @@
 
   modifications = final: prev: {
     abella-modded = prev.abella.overrideAttrs (oldAttrs: {
+      pname = "abella-modded";
       version = "2021.07.04";
       src = prev.fetchFromGitHub {
         owner = "JimmyZJX";

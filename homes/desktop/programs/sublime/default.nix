@@ -52,7 +52,7 @@ in
 
     packageSettings = {
       abella = {
-        "abella.exec" = "abella";
+        "abella.exec" = "${pkgs.abella-modded}/bin/abella";
         "proof_view_mode" = "panel";
       };
     };
