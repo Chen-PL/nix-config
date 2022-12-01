@@ -6,6 +6,7 @@
     ./fzf
     ./nix-index
     ./opam
+    ./sublime
     ./vscode
     ./zoxide
   ];

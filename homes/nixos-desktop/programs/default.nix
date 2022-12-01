@@ -7,7 +7,7 @@
     ./nnn
     ./rime
     ./rofi
-    ./sublime-text
+    # ./sublime-text
     ./xmonad
   ];
 

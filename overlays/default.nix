@@ -5,6 +5,7 @@ let
   subs = [ ./unix ./linux ./darwin ];
 in
 {
-  additions = merge "additions" subs;
-  modifications = merge "modifications" subs;
+  # partial application would not pass the stupid cheking
+  additions = final: prev: merge "additions" subs final prev;
+  modifications = final: prev: merge "modifications" subs final prev;
 }

@@ -14,6 +14,7 @@
     stress # Simple workload generator for POSIX systems. It imposes a configurable amount of CPU, memory, I/O, and disk stress on the system
     sublime4 # Sophisticated text editor for code, markup and prose (and Abella)
     texlive.combined.scheme-full # TeX Live environment for scheme-full
+    zoom-us # zoom.us video conferencing application
 
     # Fonts
     fira # Sans-serif font for Firefox OS

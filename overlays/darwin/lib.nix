@@ -24,7 +24,6 @@ final: prev:
         '' + postInstall;
         meta = with prev.lib; {
           inherit description homepage;
-          maintainers = with maintainers; [ jwiegley ];
           platforms = platforms.darwin;
         };
       };

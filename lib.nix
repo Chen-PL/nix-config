@@ -5,7 +5,7 @@ let
   inherit (inputs) nixpkgs nur;
   inherit (inputs.darwin.lib) darwinSystem;
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
-  inherit (nixpkgs.lib) genAttrs nixosSystem;
+  inherit (nixpkgs.lib) attrValues genAttrs nixosSystem;
   inherit (nixpkgs.lib.attrsets) filterAttrs mapAttrs' nameValuePair;
 
   withPrefix = prefix: map (tag: ./${prefix}/${tag});
@@ -18,6 +18,7 @@ let
   mkOverlays = tag:
     let overlays = import ./overlays/${tag}; in
     with overlays; [ additions modifications ];
+  mkModules = moduleType: attrValues (import ./modules/${moduleType});
   mkConfigs = mkFunc: prefix: username:
     mapAttrs' (hostname: config: nameValuePair
       ((if prefix then "${username}@" else "") + hostname)
@@ -56,7 +57,7 @@ rec {
       assert elem arch architectures;
       nixosSystem {
         pkgs = mkPkgs arch "linux";
-        modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ];
+        modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ] ++ mkModules "nixos";
         specialArgs = defaultSpecialArgs // (filterArgs args);
       };
 
@@ -73,7 +74,7 @@ rec {
       darwinSystem {
         inherit system;
         pkgs = mkPkgs arch "darwin";
-        modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ];
+        modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ] ++ mkModules "nixos";
         specialArgs = defaultSpecialArgs // (filterArgs args);
       };
 
@@ -97,7 +98,7 @@ rec {
       in
       homeManagerConfiguration {
         inherit pkgs;
-        modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ];
+        modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ] ++ mkModules "home-manager";
         extraSpecialArgs = defaultSpecialArgs // homeSpecialArgs // (filterArgs args);
       };
 
