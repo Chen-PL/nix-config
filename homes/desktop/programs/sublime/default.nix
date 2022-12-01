@@ -50,12 +50,13 @@ in
       };
     };
 
-    packageSettings = {
-      abella = {
-        "abella.exec" = "${pkgs.abella-modded}/bin/abella";
-        "proof_view_mode" = "panel";
-      };
-    };
+    packageSettings =
+      if isLinux then {
+        abella = {
+          "abella.exec" = "${pkgs.abella-modded}/bin/abella";
+          "proof_view_mode" = "panel";
+        };
+      } else { };
 
     theme.ayu-mirage.enable = true;
 
