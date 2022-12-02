@@ -1,7 +1,11 @@
+{ pkgs, ... }:
+
 let
-  keyid = "0xD4B98575F4F55465";
+  KEYID = "0xD4B98575F4F55465";
 in
 {
+  home.sessionVariables = { inherit KEYID; };
+
   programs.gpg = {
     enable = true;
 
@@ -55,8 +59,8 @@ in
       # Disable recipient key ID in messages
       throw-keyids = true;
       # Default/trusted key ID to use (helpful with throw-keyids)
-      default-key = keyid;
-      trusted-key = keyid;
+      default-key = KEYID;
+      trusted-key = KEYID;
       # Group recipient keys (preferred ID last)
       # group = "keygroup = 0xFF00000000000001 0xFF00000000000002 0xFF3E7D88647EBCDB";
       # Keyserver URL
@@ -72,5 +76,17 @@ in
       # Show expired subkeys
       # list-options = "show-unusable-subkeys";
     };
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    enableZshIntegration = true;
+    defaultCacheTtl = 60;
+    maxCacheTtl = 120;
+    pinentryFlavor = "curses";
+    extraConfig = ''
+      pinentry-program "${pkgs.pinentry-curses}/bin/pinentry-curses"
+    '';
   };
 }
