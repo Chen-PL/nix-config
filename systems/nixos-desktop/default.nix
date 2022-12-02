@@ -3,6 +3,7 @@
 {
   imports = [
     ./locale
+    ./security
     ./xserver
   ];
 
@@ -48,42 +49,8 @@
 
   programs.dconf.enable = true;
 
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
-
-  environment.systemPackages = with pkgs; [
-    gnupg
-    pinentry-gnome
-    pinentry-curses
-  ];
-
-  environment.shellInit = ''
-    export GPG_TTY="$(tty)"
-    gpg-connect-agent /bye
-    export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
-  '';
-
-  services = {
-    # For 1Password (otherwise it keeps asking for two-refactor)
-    gnome.gnome-keyring.enable = true;
-
-    mullvad-vpn = {
-      enable = true;
-      package = pkgs.mullvad-vpn;
-    };
-
-    udev.packages = [ pkgs.yubikey-personalization ];
-
-    # For udiskie
-    udisks2.enable = true;
-
-    # Smart card
-    pcscd.enable = true;
-  };
+  # For udiskie
+  services.udisks2.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;

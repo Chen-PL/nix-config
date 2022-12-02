@@ -9,6 +9,7 @@
     ./rime
     ./rofi
     ./xmonad
+    ./yubikey
   ];
 
   programs = {
