@@ -23,6 +23,7 @@
     tdesktop # Telegram Desktop messaging app
     vlc # Cross-platform media player and streaming server
     xfce.thunar # Xfce file manager
+    yubikey-manager-qt
 
     # Haskell
     (haskellPackages.ghcWithPackages            # The Glasgow Haskell Compiler

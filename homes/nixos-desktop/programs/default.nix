@@ -3,11 +3,11 @@
 {
   imports = [
     ./chromium
+    ./gpg
     ./micro
     ./nnn
     ./rime
     ./rofi
-    # ./sublime-text
     ./xmonad
   ];
 

@@ -48,6 +48,19 @@
 
   programs.dconf.enable = true;
 
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    gnupg
+    pinentry-gnome
+    pinentry-curses
+  ];
+
   services = {
     # For 1Password (otherwise it keeps asking for two-refactor)
     gnome.gnome-keyring.enable = true;
@@ -56,6 +69,8 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+
+    udev.packages = [ pkgs.yubikey-personalization ];
 
     # For udiskie
     udisks2.enable = true;

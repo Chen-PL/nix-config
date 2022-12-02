@@ -27,7 +27,6 @@
     ];
   };
 
-  # Bootstrap packages
   environment.systemPackages = with pkgs; [
     git
     htop
@@ -50,5 +49,7 @@
       kbdInteractiveAuthentication = false;
       permitRootLogin = "no";
     };
+
+    pcscd.enable = true;
   };
 }
