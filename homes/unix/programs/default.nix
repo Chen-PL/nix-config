@@ -2,7 +2,6 @@
   imports = [
     ./exa
     ./git
-    ./ssh
     ./zsh
   ];
 
