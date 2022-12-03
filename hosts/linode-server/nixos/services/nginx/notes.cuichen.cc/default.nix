@@ -65,6 +65,16 @@ let
       use-browser-cache = "yes";
     };
   };
+
+  juWiki = rec {
+    name = "ju";
+    port = 8102;
+    options = {
+      inherit port;
+      credentials = "credentials.csv";
+      use-browser-cache = "yes";
+    };
+  };
 in
 {
   services.nginx.virtualHosts = {
@@ -77,4 +87,5 @@ in
 
   systemd.services.tiddlywiki-research = serv researchWiki;
   systemd.services.tiddlywiki-nix = serv nixWiki;
+  systemd.services.tiddlywiki-ju = serv juWiki;
 }
