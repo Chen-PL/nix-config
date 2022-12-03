@@ -81,7 +81,7 @@ in
     ${server} = {
       forceSSL = true;
       enableACME = true;
-      locations = loc [ researchWiki nixWiki ];
+      locations = loc [ researchWiki nixWiki juWiki ];
     };
   };
 
