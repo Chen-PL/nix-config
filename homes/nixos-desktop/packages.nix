@@ -10,7 +10,6 @@
     file # A program that shows the type of files
     geeqie # Lightweight GTK based image viewer
     shutter # Screenshot and annotation tool
-    icalingua
     jq # A lightweight and flexible command-line JSON processor
     lm_sensors # Tools for reading hardware sensors
     mullvad-vpn # Client for Mullvad VPN
@@ -32,5 +31,8 @@
         xmonad-contrib # Community-maintained extensions for xmonad
       ])
     )
+
+    nur.repos.yes.electronic-wechat
+    nur.repos.linyinfeng.icalingua-plus-plus
   ];
 }
