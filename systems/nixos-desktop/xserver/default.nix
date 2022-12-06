@@ -1,29 +1,31 @@
+{ inputs, pkgs, ... }:
+
 {
   services.xserver = {
     enable = true;
+    dpi = 180;
     layout = "us";
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
-
     displayManager = {
-      defaultSession = "none+xmonad";
-      lightdm.enable = true;
+      sddm.enable = true;
+      sessionPackages = [
+        inputs.hyprland.packages.${pkgs.system}.default
+        pkgs.sway
+      ];
     };
-    
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      # disabling mouse acceleration
+      mouse.accelProfile = "flat";
+      # disabling touchpad acceleration
+      touchpad.accelProfile = "flat";
+    };
   };
-  
-  # HiDPI
-  hardware.video.hidpi.enable = true;
-  services.xserver.dpi = 180;
 
-  environment.variables = {
-    GDK_SCALE = "2";
-    GDK_DPI_SCALE = "0.5";
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    QT_SCALE_FACTOR = "2";
+  environment = {
+    sessionVariables = {
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+      XCURSOR_SIZE = "24";
+    };
   };
+  hardware.video.hidpi.enable = true;
 }

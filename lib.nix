@@ -1,8 +1,8 @@
 inputs: outputs:
 
 let
-  inherit (builtins) elem concatMap;
-  inherit (inputs) nixpkgs nur;
+  inherit (builtins) elem concatLists concatMap;
+  inherit (inputs) nixpkgs nur hypr-contrib;
   inherit (inputs.darwin.lib) darwinSystem;
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
   inherit (nixpkgs.lib) attrValues genAttrs nixosSystem;
@@ -17,7 +17,12 @@ let
   defaultSpecialArgs = { inherit inputs outputs; };
   mkOverlays = tag:
     let overlays = import ./overlays/${tag}; in
-    with overlays; [ additions modifications ];
+    with overlays; [
+      additions
+      modifications
+      nur.overlay
+      hypr-contrib.overlays.default
+    ];
   mkModules = moduleType: attrValues (import ./modules/${moduleType});
   mkConfigs = mkFunc: prefix: username:
     mapAttrs' (hostname: config: nameValuePair
@@ -57,7 +62,11 @@ rec {
       assert elem arch architectures;
       nixosSystem {
         pkgs = mkPkgs arch "linux";
-        modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ] ++ mkModules "nixos";
+        modules = concatLists [
+          (mkModules "nixos")
+          (withPrefix "systems" (nixosTags server))
+          [ ./hosts/${hostname}/nixos ]
+        ];
         specialArgs = defaultSpecialArgs // (filterArgs args);
       };
 
@@ -74,7 +83,11 @@ rec {
       darwinSystem {
         inherit system;
         pkgs = mkPkgs arch "darwin";
-        modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ] ++ mkModules "nixos";
+        modules = concatLists [
+          (mkModules "nixos")
+          (withPrefix "systems" darwinTags)
+          [ ./hosts/${hostname}/macos ]
+        ];
         specialArgs = defaultSpecialArgs // (filterArgs args);
       };
 
@@ -98,7 +111,11 @@ rec {
       in
       homeManagerConfiguration {
         inherit pkgs;
-        modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ] ++ mkModules "home-manager";
+        modules = concatLists [
+          (mkModules "home-manager")
+          (withPrefix "homes" tags)
+          [ ./hosts/${hostname}/home ]
+        ];
         extraSpecialArgs = defaultSpecialArgs // homeSpecialArgs // (filterArgs args);
       };
 

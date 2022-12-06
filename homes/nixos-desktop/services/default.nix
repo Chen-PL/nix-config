@@ -1,9 +1,9 @@
 {
   imports = [
-    ./picom
-    ./polybar
-    ./random-background
-    ./udiskie
+    # ./picom
+    # ./polybar
+    # ./random-background
+    # ./udiskie
   ];
 
   # Nicely reload system units when changing configs

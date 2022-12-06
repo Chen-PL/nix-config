@@ -52,9 +52,9 @@ in
 
     packageSettings =
       if isLinux then {
-        abella = {
+        Abella = {
           "abella.exec" = "${pkgs.abella-modded}/bin/abella";
-          "proof_view_mode" = "panel";
+          "proof_view_mode" = "window";
         };
       } else { };
 

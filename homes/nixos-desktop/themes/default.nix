@@ -5,7 +5,7 @@
     enable = true;
     font = {
       package = pkgs.fira;
-      name = "Fira Sans 11";
+      name = "Fira Sans 14";
     };
     iconTheme = {
       package = pkgs.arc-icon-theme;
@@ -15,16 +15,10 @@
       name = "Nordic";
       package = pkgs.nordic;
     };
-  };
-
-  home.pointerCursor = {
-    package = pkgs.nordic;
-    name = "Nordic";
-    size = 48;
-    gtk.enable = true;
-    x11 = {
-      enable = true;
-      defaultCursor = "X_cursor";
+    cursorTheme = {
+      name = "Arc";
+      package = pkgs.arc-icon-theme;
+      size = 24;
     };
   };
 }

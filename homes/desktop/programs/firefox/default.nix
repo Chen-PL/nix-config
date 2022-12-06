@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./search-engines.nix
+    # ./search-engines.nix
   ];
 
   programs.firefox = {
@@ -38,9 +38,9 @@
         "ui.systemUsesDarkTheme" = true; # Dark mode
       };
 
-      search = {
-        default = "Google";
-      };
+      # search = {
+      #   default = "Google";
+      # };
     };
   };
 }

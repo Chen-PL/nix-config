@@ -10,7 +10,6 @@
     file # A program that shows the type of files
     geeqie # Lightweight GTK based image viewer
     shutter # Screenshot and annotation tool
-    icalingua
     jq # A lightweight and flexible command-line JSON processor
     lm_sensors # Tools for reading hardware sensors
     mullvad-vpn # Client for Mullvad VPN
@@ -22,7 +21,7 @@
     spotify-tui # Spotify for the terminal written in Rust
     tdesktop # Telegram Desktop messaging app
     vlc # Cross-platform media player and streaming server
-    xfce.thunar # Xfce file manager
+    dolphin # KDE file manager
 
     # Haskell
     (haskellPackages.ghcWithPackages            # The Glasgow Haskell Compiler
@@ -32,5 +31,8 @@
         xmonad-contrib # Community-maintained extensions for xmonad
       ])
     )
+
+    nur.repos.yes.electronic-wechat
+    nur.repos.linyinfeng.icalingua-plus-plus
   ];
 }

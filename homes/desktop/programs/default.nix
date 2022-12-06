@@ -4,6 +4,7 @@
     ./emacs
     ./firefox
     ./fzf
+    ./kitty.nix
     ./nix-index
     ./opam
     ./ssh

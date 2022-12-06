@@ -16,7 +16,14 @@
 
     nur.url = "github:nix-community/NUR";
     hardware.url = "github:nixos/nixos-hardware";
+
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hypr-contrib.url = "github:hyprwm/contrib";
   };
 
   outputs = inputs@{ self, ... }:

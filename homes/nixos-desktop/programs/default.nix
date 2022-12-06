@@ -3,11 +3,13 @@
 {
   imports = [
     ./chromium
+    ./wayland
     ./gpg
     ./micro
     ./nnn
     ./rime
     ./rofi
+    ./wofi.nix
     ./xmonad
     ./yubikey
   ];
@@ -21,4 +23,7 @@
     tmux.enable = true;
     vim.enable = true;
   };
+
+  # for vscode
+  home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 }
