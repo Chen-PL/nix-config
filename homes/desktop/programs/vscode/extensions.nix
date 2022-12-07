@@ -20,14 +20,14 @@
   {
     name = "gitlens";
     publisher = "eamodio";
-    version = "2022.12.104";
-    sha256 = "10liz2d9ljlw4xvj44vlc1zkcvsmaqw2h70yrhq6ffbcw0049f9b";
+    version = "2022.12.704";
+    sha256 = "1fnjl3jhpj35nlkrymjghynr55c4pny20lp90grii9rxx550cza6";
   }
   {
     name = "haskell";
     publisher = "haskell";
-    version = "2.2.1";
-    sha256 = "14p9g07zsb3da4ilaasgsdvh3wagfzayqr8ichsf6k5c952zi8fk";
+    version = "2.2.2";
+    sha256 = "1d5b0p6r9ipwb7j4cx9w13vq31h78bh2sfwl54xri4gyvialhryd";
   }
   {
     name = "nix-ide";
