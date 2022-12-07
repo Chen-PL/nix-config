@@ -17,7 +17,7 @@ let
   defaultSpecialArgs = { inherit inputs outputs; };
   mkOverlays = tag:
     let overlays = import ./overlays/${tag}; in
-    with overlays; [ additions modifications ];
+    with overlays; [ additions modifications nur.overlay ];
   mkModules = moduleType: attrValues (import ./modules/${moduleType});
   mkConfigs = mkFunc: prefix: username:
     mapAttrs' (hostname: config: nameValuePair

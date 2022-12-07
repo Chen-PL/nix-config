@@ -1,14 +1,31 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
+  inherit (lib.attrsets) mapAttrs;
   nord = import ../../themes/nord.nix;
+  icons = mapAttrs (n: v: "%{T3}${v}%{T-}") {
+    # workspaces
+    www = "";
+    fsm = "";
+    thm = "";
+    com = "";
+    mus = "";
+    obs = "";
+    nix = "";
+    etc = "";
+
+    memory = "";
+    microchip = "";
+    hard-drive = "";
+    upload = "";
+    download = "";
+  };
 in
 {
   services.polybar = {
     enable = true;
     script = ''
       polybar top &
-      polybar bottom &
     '';
     package = pkgs.polybar.override {
       alsaSupport = true;
@@ -17,37 +34,32 @@ in
       pulseSupport = true;
     };
     config = with nord; {
-      "bar/base" = {
-        width = "100%";
+      "bar/top" = {
         height = "3%";
-        offset-x = 0;
-        offset-y = 0;
+        width = "99.4%";
+        offset-x = "0.3%";
+        offset-y = "0.5%";
         radius = 0;
         dpi = 180; # HiDPI
         background = nord0;
         foreground = nord9;
-        line-size = 6;
+        line-size = 5;
         padding = 2;
         cursor-click = "pointer";
         cursor-scroll = "ns-resize";
         enable-ipc = true;
-        font-0 = "FiraCode Nerd Font:style=Light:size=10;3";
-        font-1 = "WenQuanYi Micro Hei:style=Regular:size=10;3";
+        font-0 = "FiraCode Nerd Font:style=Regular:size=12;4";
+        font-1 = "WenQuanYi Micro Hei:style=Regular:size=12;4";
+        font-2 = "Font Awesome 6 Free Solid:style=Solid:size=12;4";
         module-margin = 1;
-        separator = "%{F#D8DEE9}|%{F-}";
-      };
-      "bar/top" = {
-        "inherit" = "bar/base";
-        modules-left = "ewmh title";
-        modules-right = "pulseaudio date";
-      };
-      "bar/bottom" = {
-        "inherit" = "bar/base";
-        bottom = true;
-        foreground = nord9;
-        modules-left = "os-text kernel filesystem memory network temperature cpu spotify";
+        modules-left = "ewmh";
+        modules-center = "date";
+        modules-right = "network temperature cpu filesystem memory pulseaudio";
         tray-position = "right";
-        tray-maxsize = 30;
+        tray-maxsize = 32;
+      };
+      "global/wm" = {
+        margin-bottom = "0.3%";
       };
       "module/ewmh" = {
         type = "internal/xworkspaces";
@@ -55,20 +67,26 @@ in
         enable-scroll = true;
         reverse-scroll = true;
 
+        icon-0 = "www;${icons.www}";
+        icon-1 = "fsm;${icons.fsm}";
+        icon-2 = "thm;${icons.thm}";
+        icon-3 = "com;${icons.com}";
+        icon-4 = "mus;${icons.mus}";
+        icon-5 = "obs;${icons.obs}";
+        icon-6 = "nix;${icons.nix}";
+        icon-7 = "etc;${icons.etc}";
+
         format = "<label-state>";
-        label-active = "%name%@";
-        label-occupied = "%name%*";
-        label-empty = "%name% ";
+        label-active = "%icon% %name%";
+        label-occupied = "%icon% %name%";
+        label-empty = "%icon% %name%";
         label-active-padding = 2;
         label-occupied-padding = 2;
         label-empty-padding = 2;
-        label-active-background = nord1;
-        label-active-underline = nord7;
-        label-active-foreground = nord7;
-      };
-      "module/title" = {
-        type = "internal/xwindow";
-        format-foreground = nord4;
+        label-active-underline = nord9;
+        label-active-foreground = nord0;
+        label-active-background = nord9;
+        label-occupied-underline = nord9;
       };
       "module/pulseaudio" = {
         type = "internal/pulseaudio";
@@ -91,29 +109,17 @@ in
         time = "%H:%M";
         label = "%date% %{F#8FBCBB}%time%%{F-}";
       };
-      "module/os-text" = {
-        type = "custom/text";
-        content = " NixOS";
-      };
-      "module/kernel" = {
-        type = "custom/script";
-        exec = ''
-          ${pkgs.coreutils}/bin/printf " %%{F#8FBCBB}%s%%{F-}" $(${pkgs.coreutils}/bin/uname -r)
-        '';
-        tail = false;
-        interval = 3600;
-      };
       "module/filesystem" = {
         type = "internal/fs";
         mount-0 = "/";
         interval = 10;
         fixed-values = true;
         format-mounted = "<label-mounted>";
-        label-mounted = " %{F#8FBCBB}%used:9%%{F-} (%{F#8FBCBB}%percentage_used:2%%%{F-}) %{F#D8DEE9}/%{F-} %total%";
+        label-mounted = "${icons.hdd} %{F#8FBCBB}%percentage_used:2%%%{F-}";
       };
       "module/memory" = {
         type = "internal/memory";
-        label = " %{F#8FBCBB}%gb_used:9%%{F-} (%{F#8FBCBB}%percentage_used:2%%%{F-}) %{F#D8DEE9}/%{F-} %gb_total%";
+        label = "${icons.mem} %{F#8FBCBB}%percentage_used:2%%%{F-}";
         format = "<label>";
       };
       "module/network" = {
@@ -123,7 +129,7 @@ in
         format-connected = "<label-connected>";
         format-disconnected = "<label-disconnected>";
         format-packetloss = "<animation-packetloss> <label-connected>";
-        label-connected = "祝 %{F#8FBCBB}%upspeed:9%%{F-} %{F#D8DEE9}/%{F-}  %{F#8FBCBB}%downspeed:9%%{F-}";
+        label-connected = "${icons.upload} %{F#8FBCBB}%upspeed:9%%{F-} %{F#D8DEE9}/%{F-} ${icons.download} %{F#8FBCBB}%downspeed:9%%{F-}";
         label-disconnected = "";
       };
       "module/temperature" = {
@@ -137,17 +143,8 @@ in
       };
       "module/cpu" = {
         type = "internal/cpu";
-        format = "CPU <label> <ramp-coreload>";
-        label = "%{F#8FBCBB}%percentage:2%%%{F-}";
-        ramp-coreload-spacing = 1;
-        ramp-coreload-0 = "▁";
-        ramp-coreload-1 = "▂";
-        ramp-coreload-2 = "▃";
-        ramp-coreload-3 = "▄";
-        ramp-coreload-4 = "▅";
-        ramp-coreload-5 = "▆";
-        ramp-coreload-6 = "▇";
-        ramp-coreload-7 = "█";
+        format = "${icons.cpu} <label>";
+        label = "%{F#8FBCBB}%percentage-sum:2%%%{F-}";
       };
     };
   };
