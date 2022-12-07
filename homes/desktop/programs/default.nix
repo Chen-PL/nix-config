@@ -3,12 +3,28 @@
     ./alacritty
     ./emacs
     ./firefox
-    ./fzf
-    ./nix-index
-    ./opam
     ./ssh
     ./sublime
     ./vscode
-    ./zoxide
   ];
+
+  programs = {
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    opam = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+  };
 }

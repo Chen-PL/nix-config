@@ -115,11 +115,11 @@ in
         interval = 10;
         fixed-values = true;
         format-mounted = "<label-mounted>";
-        label-mounted = "${icons.hdd} %{F#8FBCBB}%percentage_used:2%%%{F-}";
+        label-mounted = "${icons.hard-drive} %{F#8FBCBB}%percentage_used:2%%%{F-}";
       };
       "module/memory" = {
         type = "internal/memory";
-        label = "${icons.mem} %{F#8FBCBB}%percentage_used:2%%%{F-}";
+        label = "${icons.memory} %{F#8FBCBB}%percentage_used:2%%%{F-}";
         format = "<label>";
       };
       "module/network" = {
@@ -143,7 +143,7 @@ in
       };
       "module/cpu" = {
         type = "internal/cpu";
-        format = "${icons.cpu} <label>";
+        format = "${icons.microchip} <label>";
         label = "%{F#8FBCBB}%percentage-sum:2%%%{F-}";
       };
     };

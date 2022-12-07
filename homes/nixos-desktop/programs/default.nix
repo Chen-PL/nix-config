@@ -4,8 +4,8 @@
   imports = [
     ./chromium
     ./gpg
-    ./micro
-    ./nnn
+    ./micro.nix
+    ./nnn.nix
     ./rime
     ./rofi
     ./xmonad
