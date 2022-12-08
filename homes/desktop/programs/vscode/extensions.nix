@@ -20,8 +20,8 @@
   {
     name = "gitlens";
     publisher = "eamodio";
-    version = "2022.12.704";
-    sha256 = "1fnjl3jhpj35nlkrymjghynr55c4pny20lp90grii9rxx550cza6";
+    version = "2022.12.804";
+    sha256 = "0dhsz8bk72p0bgwdlnmvqy9xsyl9636fp2vv0jdwpcgf4g7vy2wb";
   }
   {
     name = "haskell";
@@ -74,8 +74,14 @@
   {
     name = "remote-explorer";
     publisher = "ms-vscode";
-    version = "0.1.2022112409";
-    sha256 = "1b54ps2lyzq35q51hl4rv0klhnbps47692pzwajbalnmbla5jigg";
+    version = "0.1.2022120816";
+    sha256 = "02d08ss2jbqk0j8qs35zrzjq7rl9hys8imnxd1f8c14rgn3yq4rw";
+  }
+  {
+    name = "color-highlight";
+    publisher = "naumovs";
+    version = "2.6.0";
+    sha256 = "1ssh5d4kn3b57gfw5w99pp3xybdk2xif8z6l7m3y2qf204wd1hsd";
   }
   {
     name = "material-icon-theme";
@@ -92,7 +98,7 @@
   {
     name = "vscode-wakatime";
     publisher = "WakaTime";
-    version = "22.0.1";
-    sha256 = "1v5lhyqga3rndj54b1z1n1c1xj2kmn62v5rlccg7v4l0cqdk2kri";
+    version = "22.1.0";
+    sha256 = "17jbcwc89609ki1q6zpbyqwwd5700i6407241kpjajk7gbxra8gd";
   }
 ]
