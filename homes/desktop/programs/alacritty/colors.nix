@@ -1,6 +1,6 @@
 { config, tools, ... }:
 
-with tools.withHashtag config.colorScheme.colors;
+with tools.nix-colors.withHashtag config.colorScheme.colors;
 
 {
   programs.alacritty.settings.colors = {
@@ -37,24 +37,24 @@ with tools.withHashtag config.colorScheme.colors;
 
     normal = {
       black = base00;
-      red = base08;
-      green = base0B;
-      yellow = base0A;
-      blue = base0D;
-      magenta = base0E;
-      cyan = base0C;
+      red = base0B;
+      green = base0E;
+      yellow = base0D;
+      blue = base09;
+      magenta = base0F;
+      cyan = base08;
       white = base05;
     };
     
     bright = {
       black = base03;
-      red = base09;
-      green = base01;
-      yellow = base02;
-      blue = base04;
-      magenta = base06;
-      cyan = base0F;
-      white = base07;
+      red = base0B;
+      green = base0E;
+      yellow = base0D;
+      blue = base09;
+      magenta = base0F;
+      cyan = base07;
+      white = base06;
     };
   };
 }

@@ -45,11 +45,11 @@ in
     inputbar = {
       color = mkLiteral "#${base06}";
       padding = mkLiteral "11px";
-      background-color = mkLiteral "#3b4252";
+      background-color = mkLiteral "#${base01}";
 
       border = mkLiteral "1px";
       border-radius = mkLiteral "6px 6px 0px 0px";
-      border-color = mkLiteral "#${base0F}";
+      border-color = mkLiteral "#${base0A}";
     };
 
     "entry, prompt, case-indicator" = {
@@ -64,7 +64,7 @@ in
     listview = {
       padding = mkLiteral "8px";
       border-radius = mkLiteral "0px 0px 6px 6px";
-      border-color = mkLiteral "#${base0F}";
+      border-color = mkLiteral "#${base0A}";
       border = mkLiteral "0px 1px 1px 1px";
 
       background-color = mkLiteral "rgba(${hexToRGBString "," base00},0.9)";

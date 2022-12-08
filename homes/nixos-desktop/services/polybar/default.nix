@@ -22,6 +22,10 @@ let
   };
 in
 {
+  imports = [
+    ./modules/ewmh.nix
+  ];
+
   services.polybar = {
     enable = true;
     script = ''
@@ -60,33 +64,6 @@ in
       };
       "global/wm" = {
         margin-bottom = "0.3%";
-      };
-      "module/ewmh" = {
-        type = "internal/xworkspaces";
-        enable-click = true;
-        enable-scroll = true;
-        reverse-scroll = true;
-
-        icon-0 = "www;${icons.www}";
-        icon-1 = "fsm;${icons.fsm}";
-        icon-2 = "thm;${icons.thm}";
-        icon-3 = "com;${icons.com}";
-        icon-4 = "mus;${icons.mus}";
-        icon-5 = "obs;${icons.obs}";
-        icon-6 = "nix;${icons.nix}";
-        icon-7 = "etc;${icons.etc}";
-
-        format = "<label-state>";
-        label-active = "%icon% %name%";
-        label-occupied = "%icon% %name%";
-        label-empty = "%icon% %name%";
-        label-active-padding = 2;
-        label-occupied-padding = 2;
-        label-empty-padding = 2;
-        label-active-underline = nord9;
-        label-active-foreground = nord0;
-        label-active-background = nord9;
-        label-occupied-underline = nord9;
       };
       "module/pulseaudio" = {
         type = "internal/pulseaudio";

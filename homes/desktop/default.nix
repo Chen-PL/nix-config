@@ -2,12 +2,9 @@
 
 {
   imports = [
-    nix-colors.homeManagerModule
+    ./colors.nix
     ./fonts.nix
     ./packages.nix
     ./programs
   ];
-
-  colorScheme = nix-colors.colorSchemes.nord;
-  # config.colorScheme.colors.baseXX
 }
