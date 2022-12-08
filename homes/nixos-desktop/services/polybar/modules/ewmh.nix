@@ -5,6 +5,7 @@ with tools.nix-colors.withHashtag config.colorScheme.colors;
 
 let
   icon-font = 3;
+  label = "%icon%";
 
   inherit (builtins) length;
   inherit (lib.lists) range zipListsWith;
@@ -33,9 +34,9 @@ in
     reverse-scroll = true;
 
     format = "<label-state>";
-    label-active = "%icon% %name%";
-    label-occupied = "%icon% %name%";
-    label-empty = "%icon% %name%";
+    label-active = label;
+    label-occupied = label;
+    label-empty = label;
     label-active-padding = 2;
     label-occupied-padding = 2;
     label-empty-padding = 2;

@@ -4,16 +4,6 @@ let
   inherit (lib.attrsets) mapAttrs;
   nord = import ../../themes/nord.nix;
   icons = mapAttrs (n: v: "%{T3}${v}%{T-}") {
-    # workspaces
-    www = "";
-    fsm = "";
-    thm = "";
-    com = "";
-    mus = "";
-    obs = "";
-    nix = "";
-    etc = "";
-
     memory = "";
     microchip = "";
     hard-drive = "";
@@ -28,9 +18,7 @@ in
 
   services.polybar = {
     enable = true;
-    script = ''
-      polybar top &
-    '';
+    script = "polybar top &";
     package = pkgs.polybar.override {
       alsaSupport = true;
       mpdSupport = true;
