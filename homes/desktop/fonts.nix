@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  fonts.fontconfig.enable = true;
-
   home.packages = with pkgs; [
     font-manager
     fira # Sans-serif font for Firefox OS
@@ -14,4 +12,6 @@
     wqy_microhei # A (mainly) Chinese Unicode font
     wqy_zenhei # A (mainly) Chinese Unicode font
   ];
+
+  fonts.fontconfig.enable = true;
 }

@@ -16,13 +16,14 @@
 
     nur.url = "github:nix-community/NUR";
     hardware.url = "github:nixos/nixos-hardware";
+    nix-colors.url = "github:misterio77/nix-colors";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
   outputs = inputs@{ self, ... }:
     let
       inherit (self) outputs;
-      inherit (import ./lib.nix inputs outputs)
+      inherit (import ./lib/flake inputs outputs)
         importWithPkgs mkNixosConfigs mkDarwinConfigs mkHomeConfigs;
 
       hosts = {

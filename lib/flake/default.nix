@@ -1,24 +1,29 @@
 inputs: outputs:
 
 let
+  root = "../..";
+
   inherit (builtins) elem concatMap;
-  inherit (inputs) nixpkgs nur;
+  inherit (inputs) nixpkgs nur nix-colors;
   inherit (inputs.darwin.lib) darwinSystem;
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
   inherit (nixpkgs.lib) attrValues genAttrs nixosSystem;
   inherit (nixpkgs.lib.attrsets) filterAttrs mapAttrs' nameValuePair;
 
-  withPrefix = prefix: map (tag: ./${prefix}/${tag});
+  withPrefix = prefix: map (tag: ./${root}/${prefix}/${tag});
   concatWithDash = x: y: "${x}-${y}";
   nixosTags = server: [ "unix" "nixos" ] ++
     (if server then [ "nixos-server" ] else [ "desktop" "nixos-desktop" ]);
   darwinTags = [ "unix" "desktop" "darwin-desktop" ];
   filterArgs = filterAttrs (n: v: !(elem n [ "arch" "server" ]));
-  defaultSpecialArgs = { inherit inputs outputs; };
+  defaultSpecialArgs = {
+    inherit inputs outputs;
+    tools = import ./${root}/lib/tools { inherit (nixpkgs) lib; };
+  };
   mkOverlays = tag:
-    let overlays = import ./overlays/${tag}; in
+    let overlays = import ./${root}/overlays/${tag}; in
     with overlays; [ additions modifications nur.overlay ];
-  mkModules = moduleType: attrValues (import ./modules/${moduleType});
+  mkModules = moduleType: attrValues (import ./${root}/modules/${moduleType});
   mkConfigs = mkFunc: prefix: username:
     mapAttrs' (hostname: config: nameValuePair
       ((if prefix then "${username}@" else "") + hostname)
@@ -57,7 +62,7 @@ rec {
       assert elem arch architectures;
       nixosSystem {
         pkgs = mkPkgs arch "linux";
-        modules = withPrefix "systems" (nixosTags server) ++ [ ./hosts/${hostname}/nixos ] ++ mkModules "nixos";
+        modules = withPrefix "systems" (nixosTags server) ++ [ ./${root}/hosts/${hostname}/nixos ] ++ mkModules "nixos";
         specialArgs = defaultSpecialArgs // (filterArgs args);
       };
 
@@ -74,8 +79,8 @@ rec {
       darwinSystem {
         inherit system;
         pkgs = mkPkgs arch "darwin";
-        modules = withPrefix "systems" darwinTags ++ [ ./hosts/${hostname}/macos ] ++ mkModules "nixos";
-        specialArgs = defaultSpecialArgs // (filterArgs args);
+        modules = withPrefix "systems" darwinTags ++ [ ./${root}/hosts/${hostname}/macos ] ++ mkModules "nixos";
+        specialArgs = defaultSpecialArgs // filterArgs args;
       };
 
   mkHomeConfig =
@@ -92,14 +97,15 @@ rec {
         tags = if platform == "linux" then nixosTags server else darwinTags;
         pkgs = mkPkgs arch platform;
         nur-modules = import nur { inherit pkgs; nurpkgs = pkgs; };
-        homeSpecialArgs = {
+        homeSpecialArgs = if server then { } else {
+          inherit nix-colors;
           inherit (nur-modules.repos.rycee) firefox-addons;
         };
       in
       homeManagerConfiguration {
         inherit pkgs;
-        modules = withPrefix "homes" tags ++ [ ./hosts/${hostname}/home ] ++ mkModules "home-manager";
-        extraSpecialArgs = defaultSpecialArgs // homeSpecialArgs // (filterArgs args);
+        modules = withPrefix "homes" tags ++ [ ./${root}/hosts/${hostname}/home ] ++ mkModules "home-manager";
+        extraSpecialArgs = defaultSpecialArgs // homeSpecialArgs // filterArgs args;
       };
 
   mkNixosConfigs = mkConfigs mkNixosConfig false;

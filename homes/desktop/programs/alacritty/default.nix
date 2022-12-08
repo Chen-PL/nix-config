@@ -1,11 +1,14 @@
 {
+  imports = [
+    ./colors.nix
+  ];
+
   programs.alacritty = {
     enable = true;
     settings = {
       env = {
         TERM = "xterm-256color";
       };
-      colors = import ./nord.nix;
       window = {
         padding = {
           x = 24;
