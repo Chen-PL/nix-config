@@ -1,7 +1,7 @@
 { inputs, username, ... }:
 
 {
-  imports = [ inputs.impermanence.nixosModules.impermanence ];
+  imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ];
 
   home.persistence."/nix/persist/home/${username}" = {
     directories = [
