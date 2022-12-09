@@ -15,18 +15,8 @@
     "sd_mod"
   ];
 
-  fileSystems."/" = {
-<<<<<<< HEAD
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "defaults" "size=32G" "mode=755" ];
-  };
-
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/ec092543-e2ea-43c4-8d66-6f9cd76afde3";
-=======
     device = "/dev/disk/by-uuid/29199ab8-28f0-46c5-81a0-301055e41c9e";
->>>>>>> parent of 4cfb317 (try impermanence)
     fsType = "ext4";
   };
 
