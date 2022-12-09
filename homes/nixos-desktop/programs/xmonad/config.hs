@@ -2,6 +2,7 @@ import Control.Monad (forM_, join)
 import Data.Function (on)
 import Data.List (sortBy)
 import XMonad
+import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.DynamicProjects
 import XMonad.Hooks.DynamicLog (xmobarProp)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
@@ -35,9 +36,9 @@ myConfig =
       layoutHook = myLayoutHook,
       startupHook = myStartupHook,
       workspaces = myWorkspace,
-      borderWidth = 2,
-      normalBorderColor = "#D8DEE9",
-      focusedBorderColor = "#8FBCBB",
+      borderWidth = 3,
+      normalBorderColor = "#4C566A",
+      focusedBorderColor = "#A3BE8C",
       -- focusFollowsMouse = False,
       clickJustFocuses = False
     }
@@ -55,7 +56,6 @@ thmWs = "thm"
 
 comWs :: WorkspaceId
 comWs = "com"
-
 
 musWs :: WorkspaceId
 musWs = "mus"
@@ -120,12 +120,12 @@ projects =
 
 addKeys :: [(String, X ())]
 addKeys =
-  [ ("M-<Space>", spawn "rofi -show drun"),
-    ("M-C-<Space>", spawn "rofi -show window"),
-    ("M-f", spawn "rofi -show filebrowser"),
+  [ ("M-<Tab>", toggleWS),
+    ("M-<Return>", spawn $ XMonad.terminal myConfig),
+    ("M-S-<Return>", spawn "rofi -show drun"),
     ("M-S-<Space>", switchProjectPrompt projectsTheme),
     ("M-/", shiftToProjectPrompt projectsTheme),
-    ("M-<Tab>", sendMessage NextLayout),
+    ("M-<Space>", sendMessage NextLayout),
     -- Focus
     ("M-<Left>", windows focusUp),
     ("M-<Right>", windows focusDown),
