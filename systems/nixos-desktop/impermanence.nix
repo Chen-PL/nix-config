@@ -4,7 +4,10 @@ let
   persistRoot = "/nix/persist";
 in
 {
-  imports = [ inputs.impermanence.nixosModules.impermanence ];
+  imports = [
+    inputs.impermanence.nixosModules.impermanence
+    inputs.impermanence.nixosModules.home-manager.impermanence
+  ];
 
   environment.persistence.${persistRoot} = {
     files = [ ];
