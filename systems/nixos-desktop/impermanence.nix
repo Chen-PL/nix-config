@@ -7,9 +7,7 @@ in
   imports = [ inputs.impermanence.nixosModules.impermanence ];
 
   environment.persistence.${persistRoot} = {
-    files = [
-      "/etc/machine-id"
-    ];
+    files = [ ];
   };
 
   users.users = {
