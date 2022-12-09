@@ -35,7 +35,7 @@
           intel-nuc-12 = {
             arch = "x86_64";
             platform = "linux";
-            stateVersion = "22.11";
+            stateVersion = "23.05";
           };
           thinkpad-x1c-5th = {
             arch = "x86_64";
