@@ -5,7 +5,6 @@
     ./locale
     ./security
     ./xserver
-    ./impermanence.nix
   ];
 
   console = {
