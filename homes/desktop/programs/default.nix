@@ -18,10 +18,6 @@
       enable = true;
       enableZshIntegration = true;
     };
-    opam = {
-      enable = true;
-      enableZshIntegration = true;
-    };
     zoxide = {
       enable = true;
       enableZshIntegration = true;
