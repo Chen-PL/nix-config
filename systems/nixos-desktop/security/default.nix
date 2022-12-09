@@ -39,4 +39,8 @@
     login.u2fAuth = true;
     sudo.u2fAuth = true;
   };
+
+  # Allow non-root users to specify the allow_other or
+  # allow_root mount options, see mount.fuse3(8).
+  programs.fuse.userAllowOther = true;
 }

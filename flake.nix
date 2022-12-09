@@ -14,9 +14,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    
+
     nur.url = "github:nix-community/NUR";
     hardware.url = "github:nixos/nixos-hardware";
     nix-colors.url = "github:misterio77/nix-colors";
+    impermanence.url = "github:nix-community/impermanence";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
