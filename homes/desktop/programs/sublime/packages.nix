@@ -20,5 +20,11 @@
       rev = "57cb731ef47b9ede6b8af23cdfcec735fe545c6a";
       hash = "sha256-1VXmh7xP/gs9MISaTISfIx9O83jxncU2yRml3Cb3I/0=";
     };
+    wakatime = pkgs.fetchFromGitHub {
+      owner = "wakatime";
+      repo = "sublime-wakatime";
+      rev = "c1002133517337cc6f71005f71f4ab36865bceab";
+      hash = "sha256-6bZ/u6mJ7kYa1V5WLvcXs8+hKpQnCUmG1LGV0PYlu/w=";
+    };
   };
 }
