@@ -14,6 +14,18 @@
       rev = "362525bcd7a832684eed5a0e054a97356fdf353a";
       hash = "sha256-Rd/OfwRZ5jQrQERgAWwPH7TW1tqAOoRJFThAMopwlNw=";
     };
+    LSP = pkgs.fetchFromGitHub {
+      owner = "sublimelsp";
+      repo = "LSP";
+      rev = "472187b2b9c443b5a96f861c20aeea4903fae374";
+      hash = "sha256-s4nlIkJDh+jG/rPGfqn2DWrs/BYkB6ecFzZ+Mihe/Us=";
+    };
+    LSP-copilot = pkgs.fetchFromGitHub {
+      owner = "TerminalFi";
+      repo = "LSP-copilot";
+      rev = "f41608198f00ccaf69c60ed6d6c05969476e78f5";
+      hash = "sha256-HBo6X78jVwkWSUFXiPsLgnSTnL5fLr6ZJ97XR+ZXIvU=";
+    };
     nord = pkgs.fetchFromGitHub {
       owner = "arcticicestudio";
       repo = "nord-sublime-text";

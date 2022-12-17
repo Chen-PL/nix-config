@@ -4,12 +4,13 @@
   imports = [
     ./chromium
     ./gpg
-    ./micro.nix
-    ./nnn.nix
     ./rime
     ./rofi
     ./xmonad
     ./yubikey
+    ./micro.nix
+    ./nnn.nix
+    ./retroarch.nix
   ];
 
   programs = {
