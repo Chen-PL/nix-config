@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  # https://nixos.wiki/wiki/RetroArch
   home.packages = with pkgs; [
     (retroarch.override {
       cores = [

@@ -55,4 +55,7 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+  # Xbox controller
+  hardware.xpadneo.enable = true;
 }
