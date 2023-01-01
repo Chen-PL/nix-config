@@ -92,7 +92,7 @@ projects =
     Project
       { projectName = comWs,
         projectDirectory = "~/",
-        projectStartHook = Just . spawn $ "icalingua-plus-plus"
+        projectStartHook = Just . spawn $ "qq"
       },
     Project
       { projectName = musWs,

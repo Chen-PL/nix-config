@@ -16,6 +16,7 @@
     okular # KDE document viewer
     pavucontrol # PulseAudio Volume Control
     playerctl # Command-line utility and library for controlling media players that implement MPRIS
+    qq
     screenfetch # Fetches system/theme information in terminal for Linux desktop screenshots
     spotify # Play music from the Spotify music service
     spotify-tui # Spotify for the terminal written in Rust
