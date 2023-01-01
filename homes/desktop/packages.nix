@@ -5,6 +5,7 @@
     abella-modded # Interactive theorem prover (modded by Jimmy)
     coq # Coq proof assistant
     docker-compose # Docker CLI plugin to define and run multi-container applications with Docker
+    gnumake
     htop # An interactive process viewer
     mediainfo # Supplies technical and tag information about a video or audio file
     nil # Yet another language server for Nix
