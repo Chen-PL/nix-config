@@ -5,6 +5,7 @@
     ./locale
     ./security
     ./xserver
+    ./steam.nix
   ];
 
   console = {
