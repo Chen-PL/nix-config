@@ -24,7 +24,8 @@
     let
       inherit (self) outputs;
       inherit (import ./lib/flake inputs outputs)
-        importWithPkgs mkNixosConfigs mkDarwinConfigs mkHomeConfigs;
+        mkPkgs importWithPkgs mkNixosConfigs mkDarwinConfigs mkHomeConfigs;
+      inherit (inputs.home-manager.lib) homeManagerConfiguration;
 
       hosts = {
         username = "chen";
@@ -65,6 +66,16 @@
 
       nixosConfigurations = mkNixosConfigs username nixos;
       darwinConfigurations = mkDarwinConfigs username darwin;
-      homeConfigurations = mkHomeConfigs username (nixos // darwin);
+      homeConfigurations = mkHomeConfigs username (nixos // darwin) // {
+        "chen@wsl" = homeManagerConfiguration {
+          pkgs = mkPkgs "x86_64" "linux";
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            username = "chen";
+            stateVersion = "22.11";
+          };
+          modules = [ ./homes/unix ./hosts/wsl ];
+        };
+      };
     };
 }
