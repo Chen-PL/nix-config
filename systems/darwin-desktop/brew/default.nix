@@ -2,6 +2,8 @@
   homebrew = {
     enable = true;
     brews = [
+      "gnupg"
+      "pinentry-mac"
     ];
     casks = [
       "1password"

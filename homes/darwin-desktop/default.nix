@@ -2,5 +2,8 @@
 
 {
   imports = [ ./programs ];
-  home.homeDirectory = "/Users/${username}";
+  home = {
+    homeDirectory = "/Users/${username}";
+    sessionPath = [ "/opt/homebrew/bin" ];
+  };
 }

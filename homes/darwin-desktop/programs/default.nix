@@ -1,4 +1,8 @@
 {
+  imports = [
+    ./gpg
+  ];
+
   programs.zsh = {
     shellAliases = {
       update-hm = "home-manager switch --flake ~/nix-config/.#chen@macbook-air-2021";

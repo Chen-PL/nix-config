@@ -2,7 +2,7 @@
   imports = [
     ./alacritty
     ./emacs
-    ./firefox
+    # ./firefox
     ./ssh
     ./sublime
     ./vscode
